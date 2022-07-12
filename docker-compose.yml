@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  plone:
+    image: plone/plone-backend:6.0.0a4
+    environment:
+      - ADDONS=plone.volto==4.0.0a4
+      - SITE=Plone
+      - DELETE_EXISTING=1
+    platform: "linux/amd64"
+    ports:
+      - "8080:8080"
+
+
