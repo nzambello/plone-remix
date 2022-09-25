@@ -1,5 +1,9 @@
 node_modules
+package-lock.json
+yarn.lock
 
+.DS_Store
+*.swp
 /.cache
 /build
 /public/build
