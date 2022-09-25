@@ -1,5 +1,5 @@
 import type { PloneContent } from 'plone-restapi-client/dist/content'
-import { Link } from '@remix-run/react'
+import { Link, useLoaderData } from '@remix-run/react'
 import { flattenToAppURL } from '../utils/urls'
 import cx from 'classnames'
 import config from '../config'
@@ -7,21 +7,37 @@ import langmap from '~/utils/language'
 
 interface Props {
   currentLang?: string
-  translation?: PloneContent
+  translations?: {
+    '@id': string
+    language: string
+  }[]
   onClickAction?: () => void
 }
 
-const LanguageSelector = ({ currentLang, translation, onClickAction }: Props) => {
+const LanguageSelector = ({ currentLang, translations, onClickAction }: Props) => {
+  const { content } = useLoaderData<{
+    content: PloneContent
+  }>()
   const { settings } = config
 
   return settings.isMultilingual ? (
     <div className="language-selector">
       {settings.supportedLanguages.map((lang) => {
+        let translation = translations
+          ? // if we have translations, we use them as target to change language
+            // we also add content to match current content in current language
+            [...(translations || []), content]?.find((t) => t.language === lang)
+          : null
         return (
           <Link
-            aria-label={`Switch to ${langmap[lang].nativeName.toLowerCase()}`}
             className={cx({ selected: lang === currentLang })}
-            to={translation ? flattenToAppURL(translation['@id']) : `/${lang}`}
+            to={
+              translation
+                ? flattenToAppURL(translation['@id'])
+                : lang === content?.language?.token
+                ? content['@id']
+                : `/${lang}`
+            }
             title={langmap[lang].nativeName}
             onClick={() => {
               if (onClickAction) onClickAction()

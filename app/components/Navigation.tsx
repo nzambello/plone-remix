@@ -1,19 +1,14 @@
 import type { PloneContent } from 'plone-restapi-client/dist/content'
+import { Link } from '@remix-run/react'
 import { flattenToAppURL } from '~/utils/urls'
 
-const Navigation = ({
-  items
-}: {
-  items: (PloneContent & {
-    appURL?: string
-  })[]
-}) => {
+const Navigation = ({ items }: { items: PloneContent[] }) => {
   return (
     <nav>
       <ul>
         {items.map((item) => (
           <li key={item['@id']}>
-            <a href={item.appURL ?? flattenToAppURL(item['@id'])}>{item.title}</a>
+            <Link to={flattenToAppURL(item['@id'])}>{item.title}</Link>
           </li>
         ))}
       </ul>

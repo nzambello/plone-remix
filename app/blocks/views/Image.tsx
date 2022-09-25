@@ -1,7 +1,8 @@
 import type { BlockData } from 'types/blocks'
 import type { PloneContent } from 'plone-restapi-client/dist/content'
 import cx from 'classnames'
-import { flattenToAppURL, isInternalURL } from '../../utils/urls'
+import { isInternalURL, flattenToAppURL } from '../../utils/urls'
+import config from '~/config'
 
 /**
  * View image block class.
@@ -23,14 +24,10 @@ export const ImageBlockView = ({
   const href = data?.href?.[0]?.['@id']
   return (
     <p
-      className={cx(
-        'block image align',
-        {
-          center: !Boolean(content?.align),
-          detached
-        },
-        content?.align
-      )}
+      className={cx('block image align', {
+        center: !Boolean(content?.align),
+        detached
+      })}
     >
       {content?.url && (
         <>
@@ -47,10 +44,13 @@ export const ImageBlockView = ({
                   isInternalURL(content.url)
                     ? // Backwards compat in the case that the block is storing the full server URL
                       (() => {
-                        if (content.size === 'l') return `${flattenToAppURL(content.url)}/@@images/image`
-                        if (content.size === 'm') return `${flattenToAppURL(content.url)}/@@images/image/preview`
-                        if (content.size === 's') return `${flattenToAppURL(content.url)}/@@images/image/mini`
-                        return `${flattenToAppURL(content.url)}/@@images/image`
+                        if (content.size === 'l')
+                          return `${config.settings.apiPath}${flattenToAppURL(content.url)}/@@images/image`
+                        if (content.size === 'm')
+                          return `${config.settings.apiPath}${flattenToAppURL(content.url)}/@@images/image/preview`
+                        if (content.size === 's')
+                          return `${config.settings.apiPath}${flattenToAppURL(content.url)}/@@images/image/mini`
+                        return `${config.settings.apiPath}${flattenToAppURL(content.url)}/@@images/image`
                       })()
                     : content.url
                 }

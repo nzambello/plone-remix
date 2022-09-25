@@ -198,7 +198,7 @@ export function addAppURL(url: string): string {
  * frontend code (eg. ICS calendar download)
  * It is seamless mode aware
  * @method expandToBackendURL
- * @param {string} url URL or path of the object
+ * @param {string} path URL or path of the object
  * @returns {string} New URL with the backend URL
  */
 export function expandToBackendURL(path: string): string {
