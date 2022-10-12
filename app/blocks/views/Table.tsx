@@ -1,6 +1,6 @@
 import type { BlockData } from 'types/blocks';
 import type { SlateNode } from '../helpers';
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { renderSlate } from '../helpers';
 import cx from 'classnames';
 

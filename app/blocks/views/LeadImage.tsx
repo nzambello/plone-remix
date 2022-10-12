@@ -18,7 +18,7 @@ const LeadImageView = ({
     className={cx(
       'block leadimage image align',
       {
-        center: !Boolean(data?.align)
+        center: !data?.align
       },
       data?.align
     )}
@@ -35,6 +35,7 @@ const LeadImageView = ({
           );
           if (data?.href) {
             return (
+              // eslint-disable-next-line react/jsx-no-target-blank
               <a
                 href={data?.href}
                 target={data?.target ? '_blank' : undefined}

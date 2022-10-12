@@ -6,7 +6,9 @@
   "sideEffects": false,
   "scripts": {
     "format": "prettier --write app types",
-    "lint:js": "eslint \"app/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}\" types",
+    "lint:css": "stylelint \"app/*.css\"",
+    "lint:js": "eslint app types",
+    "lint": "npm run lint:js # if you have css && npm run lint:css",
     "build": "remix build",
     "dev": "remix dev",
     "start": "remix-serve build"
@@ -46,6 +48,10 @@
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "7.31.10",
     "prettier": "2.7.1",
+    "stylelint": "14.13.0",
+    "stylelint-config-idiomatic-order": "9.0.0",
+    "stylelint-config-prettier": "9.0.3",
+    "stylelint-config-recommended": "9.0.0",
     "typescript": "^4.5.5"
   },
   "prettier": {
@@ -67,10 +73,23 @@
       }
     ]
   },
-  "eslintIgnore": ["/node_modules", "/build", "/public/build"],
+  "eslintIgnore": [
+    "/node_modules",
+    "/build",
+    "/public/build"
+  ],
   "eslintConfig": {
-    "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node", "@remix-run/eslint-config/jest", "prettier", "plugin:prettier/recommended"],
-    "plugins": ["jest", "jsx-a11y"],
+    "extends": [
+      "@remix-run/eslint-config",
+      "@remix-run/eslint-config/node",
+      "@remix-run/eslint-config/jest",
+      "prettier",
+      "plugin:prettier/recommended"
+    ],
+    "plugins": [
+      "jest",
+      "jsx-a11y"
+    ],
     "settings": {
       "jest": {
         "version": 27

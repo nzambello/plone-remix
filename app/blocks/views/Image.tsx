@@ -25,7 +25,7 @@ export const ImageBlockView = ({
   return (
     <p
       className={cx('block image align', {
-        center: !Boolean(content?.align),
+        center: !content?.align,
         detached
       })}
     >
@@ -68,6 +68,7 @@ export const ImageBlockView = ({
             );
             if (href) {
               return (
+                // eslint-disable-next-line react/jsx-no-target-blank
                 <a
                   href={href}
                   target={data?.target ? '_blank' : undefined}

@@ -29,7 +29,7 @@ const VideoBlockView = ({
         className={cx(
           'block video align',
           {
-            center: !Boolean(data?.align)
+            center: !data?.align
           },
           data?.align,
           className

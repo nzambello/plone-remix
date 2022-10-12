@@ -1,4 +1,4 @@
-import { BlockData } from 'types/blocks';
+import type { BlockData } from 'types/blocks';
 
 /**
  * View description block component.
