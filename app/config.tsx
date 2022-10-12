@@ -48,6 +48,8 @@ const LinkElement = ({
 }
 
 const settings: Settings = {
+  siteTitle: 'Plome Remix',
+
   isMultilingual: true,
   supportedLanguages: ['en', 'it'],
   defaultLanguage: 'it',

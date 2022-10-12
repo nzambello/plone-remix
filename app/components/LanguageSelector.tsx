@@ -1,9 +1,10 @@
 import type { PloneContent } from 'plone-restapi-client/dist/content'
-import { Link, useLoaderData } from '@remix-run/react'
+import { Link, useLoaderData, Form } from '@remix-run/react'
 import { flattenToAppURL } from '../utils/urls'
 import cx from 'classnames'
 import config from '../config'
 import langmap from '~/utils/language'
+import { useTranslation } from 'react-i18next'
 
 interface Props {
   currentLang?: string
@@ -19,6 +20,7 @@ const LanguageSelector = ({ currentLang, translations, onClickAction }: Props) =
     content: PloneContent
   }>()
   const { settings } = config
+  const { i18n } = useTranslation()
 
   return settings.isMultilingual ? (
     <div className="language-selector">
@@ -40,6 +42,7 @@ const LanguageSelector = ({ currentLang, translations, onClickAction }: Props) =
             }
             title={langmap[lang].nativeName}
             onClick={() => {
+              i18n.changeLanguage(lang)
               if (onClickAction) onClickAction()
             }}
             key={`language-selector-${lang}`}

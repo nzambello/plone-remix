@@ -34,7 +34,14 @@ export function getBlocksLayoutFieldname(props: { [key: string]: any }): string 
  * @return {boolean} True if it has blocks data.
  */
 export function hasBlocksData(props: { [key: string]: any }): boolean {
-  return !!Object.keys(props).find((key) => key !== 'volto.blocks' && key.endsWith('blocks'))
+  // return !!Object.keys(props).find((key) => key !== 'volto.blocks' && key.endsWith('blocks'))
+  const blocksFieldName = getBlocksFieldname(props);
+
+  if (blocksFieldName) {
+    return props[blocksFieldName] && !!Object.keys(props[blocksFieldName]).length
+  }
+
+  return false;
 }
 
 /**
@@ -165,8 +172,8 @@ export const renderSlate = (id: string, nodes?: SlateNode[], override_toc?: bool
                 <br />
               </span>
             ) : (
-              <span key={t + x}>{t}</span>
-            )
+                <span key={t + x}>{t}</span>
+              )
           )}
         </Fragment>
       )

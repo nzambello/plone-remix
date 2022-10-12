@@ -9,7 +9,7 @@ const RenderBlocks = (props: { content: PloneContent; metadata?: any; blocksConf
 
   return hasBlocksData(content) ? (
     <>
-      {content.blocks_layout?.items.map((blockId: string) => {
+      {content.blocks_layout?.items?.map((blockId: string) => {
         const blockData = content.blocks?.[blockId]
         const blockType = blockData?.['@type']
         const Block = blocksConfig[blockType]?.view as (props: BlockData) => JSX.Element | null
@@ -45,8 +45,8 @@ const RenderBlocks = (props: { content: PloneContent; metadata?: any; blocksConf
       })}
     </>
   ) : (
-    <></>
-  )
+      <></>
+    )
 }
 
 export default RenderBlocks

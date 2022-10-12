@@ -1,4 +1,4 @@
-import { MetaFunction, LoaderFunction, LinksFunction, json, LoaderArgs } from '@remix-run/node'
+import { MetaFunction, LoaderFunction, LinksFunction, json, LoaderArgs, redirect } from '@remix-run/node'
 import type { PloneContent } from 'plone-restapi-client/dist/content'
 import { Link, Outlet, useLoaderData, useParams } from '@remix-run/react'
 import invariant from 'tiny-invariant'
@@ -12,11 +12,19 @@ import View from '~/views/View'
 
 plone.client.init(PLONE_RESTAPI_URL)
 
-export const meta: MetaFunction = () => ({
+invariant(config.settings.defaultLanguage, 'Missing defaultLanguage in config.settings')
+
+export const meta: MetaFunction = ({ data }) => ({
   charset: 'utf-8',
-  title: 'New Remix App',
+  title: `${data?.content?.title}${data?.content?.title ? ' | ' : ''}${config.settings.siteTitle}`,
   viewport: 'width=device-width,initial-scale=1'
 })
+
+type LoaderData = {
+  lang: string
+  content: PloneContent
+  navigation: PloneContent[] // PloneContent['@components']['navigation']['items'][]
+}
 
 export const loader = async ({ params, request }: LoaderArgs) => {
   const lang = config.settings.isMultilingual
@@ -35,7 +43,12 @@ export const loader = async ({ params, request }: LoaderArgs) => {
 
   if (!content || !!content.message) throw new Response('Not Found', { status: 404 })
 
-  return json({
+  if (content['@type'] === 'PloneSite' && config.settings.isMultilingual) {
+    const DEFAULT_LANG = config.settings.defaultLanguage
+    return redirect(`/${DEFAULT_LANG}`)
+  }
+
+  return json<LoaderData>({
     lang,
     content: {
       ...content,
@@ -63,7 +76,7 @@ export const loader = async ({ params, request }: LoaderArgs) => {
 }
 
 export default function ContentPage() {
-  const { navigation, lang, content } = useLoaderData()
+  const { navigation, lang, content } = useLoaderData() as LoaderData
 
   return (
     <>

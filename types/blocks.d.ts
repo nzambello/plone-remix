@@ -51,6 +51,7 @@ export type SlateElementData = {
 }
 
 export type Settings = {
+  siteTitle: string
   isMultilingual: boolean
   supportedLanguages: string[]
   defaultLanguage: string
