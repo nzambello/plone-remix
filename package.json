@@ -9,6 +9,8 @@
     "lint:css": "stylelint \"app/*.css\"",
     "lint:js": "eslint app types",
     "lint": "npm run lint:js # if you have css && npm run lint:css",
+    "prepare": "is-ci || husky install",
+    "release": "release-it",
     "build": "remix build",
     "dev": "remix dev",
     "start": "remix-serve build"
@@ -34,6 +36,9 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-conventional": "17.1.0",
+    "@release-it/conventional-changelog": "5.1.1",
     "@remix-run/dev": "^1.4.0",
     "@remix-run/eslint-config": "^1.4.0",
     "@types/i18next-fs-backend": "1.1.2",
@@ -47,7 +52,10 @@
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "7.31.10",
+    "husky": "8.0.1",
+    "is-ci": "3.0.1",
     "prettier": "2.7.1",
+    "release-it": "15.5.0",
     "stylelint": "14.13.0",
     "stylelint-config-idiomatic-order": "9.0.0",
     "stylelint-config-prettier": "9.0.3",
@@ -105,6 +113,45 @@
       ],
       "react/jsx-uses-react": "off",
       "react/react-in-jsx-scope": "off"
+    }
+  },
+  "release-it": {
+    "git": {
+      "tagName": "v${version}",
+      "commitMessage": "chore: release v${version}"
+    },
+    "npm": {
+      "publish": false
+    },
+    "github": {
+      "release": true,
+      "releaseName": "${version}"
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "infile": "CHANGELOG.md",
+        "preset": {
+          "name": "conventionalcommits",
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "refactor",
+              "section": "Changes"
+            },
+            {
+              "type": "chore",
+              "section": "Maintenance"
+            }
+          ]
+        }
+      }
     }
   },
   "engines": {
