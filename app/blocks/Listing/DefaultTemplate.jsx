@@ -41,6 +41,6 @@ const DefaultTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
 DefaultTemplate.propTypes = {
   items: PropTypes.arrayOf(PropTypes.any).isRequired,
   linkMore: PropTypes.any,
-  isEditMode: PropTypes.bool,
+  isEditMode: PropTypes.bool
 };
 export default DefaultTemplate;

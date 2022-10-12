@@ -1,8 +1,8 @@
-import Backend from 'i18next-fs-backend'
-import { resolve } from 'node:path'
-import { RemixI18Next } from 'remix-i18next'
-import i18n from '~/i18n'
-import { i18nCookie } from './cookies.server'
+import Backend from 'i18next-fs-backend';
+import { resolve } from 'node:path';
+import { RemixI18Next } from 'remix-i18next';
+import i18n from '~/i18n';
+import { i18nCookie } from './cookies.server';
 
 let i18next = new RemixI18Next({
   detection: {
@@ -22,6 +22,6 @@ let i18next = new RemixI18Next({
   // Tip: You could pass `resources` to the `i18next` configuration and avoid
   // a backend here
   backend: Backend
-})
+});
 
-export default i18next
+export default i18next;

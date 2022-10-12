@@ -1,9 +1,9 @@
-import type { BlockData } from 'types/blocks'
-import { useState, useEffect } from 'react'
-import ReactPlayer from 'react-player'
-import cx from 'classnames'
+import type { BlockData } from 'types/blocks';
+import { useState, useEffect } from 'react';
+import ReactPlayer from 'react-player';
+import cx from 'classnames';
 
-let isHydrating = true
+let isHydrating = true;
 
 /**
  * View video block class.
@@ -13,15 +13,15 @@ const VideoBlockView = ({
   data,
   className
 }: BlockData<{
-  url?: string
-  align?: string
+  url?: string;
+  align?: string;
 }>) => {
-  let [isHydrated, setIsHydrated] = useState(!isHydrating)
+  let [isHydrated, setIsHydrated] = useState(!isHydrating);
 
   useEffect(() => {
-    isHydrating = false
-    setIsHydrated(true)
-  }, [])
+    isHydrating = false;
+    setIsHydrated(true);
+  }, []);
 
   if (isHydrated) {
     return (
@@ -42,12 +42,12 @@ const VideoBlockView = ({
           })}
         ></div>
       </div>
-    )
+    );
   } else {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
-}
+};
 
-VideoBlockView.displayBame = 'VideoBlock'
+VideoBlockView.displayBame = 'VideoBlock';
 
-export default VideoBlockView
+export default VideoBlockView;

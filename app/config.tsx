@@ -1,38 +1,40 @@
-import type { SlateElementData, Settings, BlockConfig } from 'types/blocks'
-import { PLONE_RESTAPI_URL, PUBLIC_URL } from '~/utils/variables.server'
+import type { SlateElementData, Settings, BlockConfig } from 'types/blocks';
+import { PLONE_RESTAPI_URL, PUBLIC_URL } from '~/utils/variables.server';
 
 /*
  * Blocks
  */
 
-import TitleBlock from './blocks/views/Title'
-import DescriptionBlock from './blocks/views/Description'
-import TextBlock from './blocks/views/Text'
-import HTMLBlock from './blocks/views/HTML'
-import TableBlock from './blocks/views/Table'
-import ImageBlock from './blocks/views/Image'
-import MapsBlock from './blocks/views/Maps'
-import LeadImage from './blocks/views/LeadImage'
-import VideoBlock from './blocks/views/Video'
+import TitleBlock from './blocks/views/Title';
+import DescriptionBlock from './blocks/views/Description';
+import TextBlock from './blocks/views/Text';
+import HTMLBlock from './blocks/views/HTML';
+import TableBlock from './blocks/views/Table';
+import ImageBlock from './blocks/views/Image';
+import MapsBlock from './blocks/views/Maps';
+import LeadImage from './blocks/views/LeadImage';
+import VideoBlock from './blocks/views/Video';
 
 const LinkElement = ({
   attributes,
   data,
   children
 }: {
-  attributes?: { [key: string]: any }
-  data?: SlateElementData
-  children: JSX.Element[]
+  attributes?: { [key: string]: any };
+  data?: SlateElementData;
+  children: JSX.Element[];
 }) => {
-  const internal_link = data?.link?.internal?.internal_link?.[0]?.['@id']
-  const external_link = data?.link?.external?.external_link
-  const email = data?.link?.email
+  const internal_link = data?.link?.internal?.internal_link?.[0]?.['@id'];
+  const external_link = data?.link?.external?.external_link;
+  const email = data?.link?.email;
 
-  const target = data?.link?.internal?.target ?? data?.link?.external?.target
+  const target = data?.link?.internal?.target ?? data?.link?.external?.target;
 
   const href = email
-    ? `mailto:${email.email_address}${email.email_subject ? `?subject=${email.email_subject}` : ''}`
-    : external_link || internal_link || data?.url
+    ? `mailto:${email.email_address}${
+        email.email_subject ? `?subject=${email.email_subject}` : ''
+      }`
+    : external_link || internal_link || data?.url;
 
   return (
     <a
@@ -44,8 +46,8 @@ const LinkElement = ({
     >
       {children}
     </a>
-  )
-}
+  );
+};
 
 const settings: Settings = {
   siteTitle: 'Plome Remix',
@@ -73,12 +75,12 @@ const settings: Settings = {
       li: ({ attributes, children }) => <li {...attributes}>{children}</li>,
       ol: ({ attributes, children }) => <ol {...attributes}>{children}</ol>,
       ul: ({ attributes, children }) => {
-        return <ul {...attributes}>{children}</ul>
+        return <ul {...attributes}>{children}</ul>;
       },
 
       div: ({ attributes, children }) => <div {...attributes}>{children}</div>,
       p: ({ attributes, children }) => {
-        return <p {...attributes}>{children}</p>
+        return <p {...attributes}>{children}</p>;
       },
 
       // While usual slate editor consider these to be Leafs, we treat them as
@@ -87,10 +89,10 @@ const settings: Settings = {
       em: ({ children }) => <em>{children}</em>,
       i: ({ children }) => <i>{children}</i>,
       b: ({ children }) => {
-        return <b>{children}</b>
+        return <b>{children}</b>;
       },
       strong: ({ children }) => {
-        return <strong>{children}</strong>
+        return <strong>{children}</strong>;
       },
       u: ({ children }) => <u>{children}</u>,
       s: ({ children }) => <del>{children}</del>,
@@ -130,7 +132,7 @@ const settings: Settings = {
     '/create-translation',
     '/manage-translations'
   ]
-}
+};
 
 const blocksConfig: { [type: string]: BlockConfig } = {
   title: {
@@ -297,6 +299,6 @@ const blocksConfig: { [type: string]: BlockConfig } = {
   //     }
   //   }
   // }
-}
+};
 
-export default { blocksConfig, settings }
+export default { blocksConfig, settings };

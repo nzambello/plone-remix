@@ -28,7 +28,7 @@ const _filtered = (obj) =>
     ...Object.keys(obj).map((k) => {
       const reject = k !== 'properties' && !isfunc(obj[k]);
       return reject ? { [k]: obj[k] } : {};
-    }),
+    })
   );
 
 const blockPropsAreChanged = (prevProps, nextProps) => {
@@ -43,14 +43,14 @@ const applyDefaults = (data, root) => {
     {
       i: 'path',
       o: 'plone.app.querystring.operation.string.absolutePath',
-      v: root || '/',
-    },
+      v: root || '/'
+    }
   ];
   return {
     ...data,
     sort_on: data?.sort_on || 'effective',
     sort_order: data?.sort_order || 'descending',
-    query: data?.query?.length ? data.query : defaultQuery,
+    query: data?.query?.length ? data.query : defaultQuery
   };
 };
 
@@ -79,7 +79,7 @@ const SearchBlockView = (props) => {
 
 export const SearchBlockViewComponent = compose(
   withBlockExtensions,
-  (Component) => React.memo(Component, blockPropsAreChanged),
+  (Component) => React.memo(Component, blockPropsAreChanged)
 )(SearchBlockView);
 
 export default compose(withQueryString, withSearch())(SearchBlockViewComponent);

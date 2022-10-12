@@ -1,4 +1,4 @@
-import { BlockData } from 'types/blocks'
+import { BlockData } from 'types/blocks';
 
 /**
  * View description block component.
@@ -6,9 +6,13 @@ import { BlockData } from 'types/blocks'
  * @extends Component
  */
 const DescriptionBlockView = ({ properties, metadata }: BlockData) => {
-  return <p className="documentDescription">{(metadata || properties)['description'] || ''}</p>
-}
+  return (
+    <p className="documentDescription">
+      {(metadata || properties)['description'] || ''}
+    </p>
+  );
+};
 
-DescriptionBlockView.displayName = 'DescriptionBlock'
+DescriptionBlockView.displayName = 'DescriptionBlock';
 
-export default DescriptionBlockView
+export default DescriptionBlockView;

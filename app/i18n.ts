@@ -1,4 +1,4 @@
-import config from './config'
+import config from './config';
 
 export default {
   // This is the list of languages your application supports
@@ -10,4 +10,4 @@ export default {
   defaultNS: 'common',
   // Disabling suspense is recommended
   react: { useSuspense: false }
-}
+};

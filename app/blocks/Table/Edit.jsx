@@ -34,21 +34,21 @@ const valueToDraft = (value) => ({
       inlineStyleRanges: [],
       key: getId(),
       text: value,
-      type: 'unstyled',
-    },
+      type: 'unstyled'
+    }
   ],
-  entityMap: {},
+  entityMap: {}
 });
 
 const emptyCell = (type) => ({
   key: getId(),
   type: type || 'data',
-  value: valueToDraft(''),
+  value: valueToDraft('')
 });
 
 const emptyRow = (cells) => ({
   key: getId(),
-  cells: map(cells, () => emptyCell()),
+  cells: map(cells, () => emptyCell())
 });
 
 const initialTable = () => ({
@@ -65,14 +65,14 @@ const initialTable = () => ({
         {
           key: getId(),
           type: 'header',
-          value: valueToDraft(''),
+          value: valueToDraft('')
         },
         {
           key: getId(),
           type: 'header',
-          value: valueToDraft(''),
-        },
-      ],
+          value: valueToDraft('')
+        }
+      ]
     },
     {
       key: getId(),
@@ -80,67 +80,67 @@ const initialTable = () => ({
         {
           key: getId(),
           type: 'data',
-          value: valueToDraft(''),
+          value: valueToDraft('')
         },
         {
           key: getId(),
           type: 'data',
-          value: valueToDraft(''),
-        },
-      ],
-    },
-  ],
+          value: valueToDraft('')
+        }
+      ]
+    }
+  ]
 });
 
 const messages = defineMessages({
   insertRowBefore: {
     id: 'Insert row before',
-    defaultMessage: 'Insert row before',
+    defaultMessage: 'Insert row before'
   },
   insertRowAfter: {
     id: 'Insert row after',
-    defaultMessage: 'Insert row after',
+    defaultMessage: 'Insert row after'
   },
   deleteRow: {
     id: 'Delete row',
-    defaultMessage: 'Delete row',
+    defaultMessage: 'Delete row'
   },
   insertColBefore: {
     id: 'Insert col before',
-    defaultMessage: 'Insert col before',
+    defaultMessage: 'Insert col before'
   },
   insertColAfter: {
     id: 'Insert col after',
-    defaultMessage: 'Insert col after',
+    defaultMessage: 'Insert col after'
   },
   deleteCol: {
     id: 'Delete col',
-    defaultMessage: 'Delete col',
+    defaultMessage: 'Delete col'
   },
   fixed: {
     id: 'Fixed width table cells',
-    defaultMessage: 'Fixed width columns',
+    defaultMessage: 'Fixed width columns'
   },
   compact: {
     id: 'Make the table compact',
-    defaultMessage: 'Reduce cell padding',
+    defaultMessage: 'Reduce cell padding'
   },
   basic: {
     id: 'Reduce complexity',
-    defaultMessage: 'Minimalistic table design',
+    defaultMessage: 'Minimalistic table design'
   },
   celled: {
     id: 'Divide each row into separate cells',
-    defaultMessage: 'Add border to inner columns',
+    defaultMessage: 'Add border to inner columns'
   },
   striped: {
     id: 'Stripe alternate rows with color',
-    defaultMessage: 'Alternate row background color',
+    defaultMessage: 'Alternate row background color'
   },
   headerCell: {
     id: 'Header cell',
-    defaultMessage: 'Header cell',
-  },
+    defaultMessage: 'Header cell'
+  }
 });
 
 /**
@@ -167,7 +167,7 @@ class Edit extends Component {
     onMutateBlock: PropTypes.func.isRequired,
     onFocusPreviousBlock: PropTypes.func.isRequired,
     onFocusNextBlock: PropTypes.func.isRequired,
-    onSelectBlock: PropTypes.func.isRequired,
+    onSelectBlock: PropTypes.func.isRequired
   };
 
   /**
@@ -176,7 +176,7 @@ class Edit extends Component {
    * @static
    */
   static defaultProps = {
-    detached: false,
+    detached: false
   };
 
   /**
@@ -190,9 +190,9 @@ class Edit extends Component {
     this.state = {
       selected: {
         row: 0,
-        cell: 0,
+        cell: 0
       },
-      isClient: false,
+      isClient: false
     };
     this.onSelectCell = this.onSelectCell.bind(this);
     this.onInsertRowBefore = this.onInsertRowBefore.bind(this);
@@ -223,7 +223,7 @@ class Edit extends Component {
     if (!this.props.data.table) {
       this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
-        table: initialTable(),
+        table: initialTable()
       });
     }
     this.setState({ isClient: true });
@@ -239,7 +239,7 @@ class Edit extends Component {
     if (!nextProps.data.table) {
       this.props.onChangeBlock(nextProps.block, {
         ...nextProps.data,
-        table: initialTable(),
+        table: initialTable()
       });
     }
   }
@@ -266,11 +266,11 @@ class Edit extends Component {
   onChangeCell(row, cell, editorState) {
     const table = { ...this.props.data.table };
     table.rows[row].cells[cell].value = this.convertToRaw(
-      editorState.getCurrentContent(),
+      editorState.getCurrentContent()
     );
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
-      table,
+      table
     });
   }
 
@@ -287,7 +287,7 @@ class Edit extends Component {
       type === 'header' ? 'data' : 'header';
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
-      table,
+      table
     });
   }
 
@@ -307,15 +307,15 @@ class Edit extends Component {
         rows: [
           ...table.rows.slice(0, this.state.selected.row),
           emptyRow(table.rows[0].cells),
-          ...table.rows.slice(this.state.selected.row),
-        ],
-      },
+          ...table.rows.slice(this.state.selected.row)
+        ]
+      }
     });
     this.setState({
       selected: {
         row: this.state.selected.row + 1,
-        cell: this.state.selected.cell,
-      },
+        cell: this.state.selected.cell
+      }
     });
   }
 
@@ -335,9 +335,9 @@ class Edit extends Component {
         rows: [
           ...table.rows.slice(0, this.state.selected.row + 1),
           emptyRow(table.rows[0].cells),
-          ...table.rows.slice(this.state.selected.row + 1),
-        ],
-      },
+          ...table.rows.slice(this.state.selected.row + 1)
+        ]
+      }
     });
   }
 
@@ -359,16 +359,16 @@ class Edit extends Component {
           cells: [
             ...row.cells.slice(0, this.state.selected.cell),
             emptyCell(table.rows[index].cells[this.state.selected.cell].type),
-            ...row.cells.slice(this.state.selected.cell),
-          ],
-        })),
-      },
+            ...row.cells.slice(this.state.selected.cell)
+          ]
+        }))
+      }
     });
     this.setState({
       selected: {
         row: this.state.selected.row,
-        cell: this.state.selected.cell + 1,
-      },
+        cell: this.state.selected.cell + 1
+      }
     });
   }
 
@@ -390,10 +390,10 @@ class Edit extends Component {
           cells: [
             ...row.cells.slice(0, this.state.selected.cell + 1),
             emptyCell(table.rows[index].cells[this.state.selected.cell].type),
-            ...row.cells.slice(this.state.selected.cell + 1),
-          ],
-        })),
-      },
+            ...row.cells.slice(this.state.selected.cell + 1)
+          ]
+        }))
+      }
     });
   }
 
@@ -411,8 +411,8 @@ class Edit extends Component {
       this.setState({
         selected: {
           row: this.state.selected.row,
-          cell: this.state.selected.cell - 1,
-        },
+          cell: this.state.selected.cell - 1
+        }
       });
     }
 
@@ -424,10 +424,10 @@ class Edit extends Component {
           ...row,
           cells: remove(
             row.cells,
-            (cell, index) => index !== this.state.selected.cell,
-          ),
-        })),
-      },
+            (cell, index) => index !== this.state.selected.cell
+          )
+        }))
+      }
     });
   }
 
@@ -445,8 +445,8 @@ class Edit extends Component {
       this.setState({
         selected: {
           row: this.state.selected.row - 1,
-          cell: this.state.selected.cell,
-        },
+          cell: this.state.selected.cell
+        }
       });
     }
 
@@ -456,9 +456,9 @@ class Edit extends Component {
         ...table,
         rows: remove(
           table.rows,
-          (row, index) => index !== this.state.selected.row,
-        ),
-      },
+          (row, index) => index !== this.state.selected.row
+        )
+      }
     });
   }
 
@@ -474,8 +474,8 @@ class Edit extends Component {
       ...this.props.data,
       table: {
         ...table,
-        [value]: !table[value],
-      },
+        [value]: !table[value]
+      }
     });
   }
 
@@ -545,7 +545,7 @@ class Edit extends Component {
                 onClick={this.onInsertRowBefore}
                 title={this.props.intl.formatMessage(messages.insertRowBefore)}
                 aria-label={this.props.intl.formatMessage(
-                  messages.insertRowBefore,
+                  messages.insertRowBefore
                 )}
               >
                 <Icon name={rowBeforeSVG} size="24px" />
@@ -558,7 +558,7 @@ class Edit extends Component {
                 onClick={this.onInsertRowAfter}
                 title={this.props.intl.formatMessage(messages.insertRowAfter)}
                 aria-label={this.props.intl.formatMessage(
-                  messages.insertRowAfter,
+                  messages.insertRowAfter
                 )}
               >
                 <Icon name={rowAfterSVG} size="24px" />
@@ -586,7 +586,7 @@ class Edit extends Component {
                 onClick={this.onInsertColBefore}
                 title={this.props.intl.formatMessage(messages.insertColBefore)}
                 aria-label={this.props.intl.formatMessage(
-                  messages.insertColBefore,
+                  messages.insertColBefore
                 )}
               >
                 <Icon name={colBeforeSVG} size="24px" />
@@ -599,7 +599,7 @@ class Edit extends Component {
                 onClick={this.onInsertColAfter}
                 title={this.props.intl.formatMessage(messages.insertColAfter)}
                 aria-label={this.props.intl.formatMessage(
-                  messages.insertColAfter,
+                  messages.insertColAfter
                 )}
               >
                 <Icon name={colAfterSVG} size="24px" />

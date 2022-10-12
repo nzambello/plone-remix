@@ -14,19 +14,19 @@ describe('CheckboxFacet', () => {
       content: { data: { '@id': 'myid' } },
       intl: {
         locale: 'en',
-        messages: {},
-      },
+        messages: {}
+      }
     });
     const component = renderer.create(
       <Provider store={store}>
         <CheckboxFacet
           choices={[
             { label: 'First', value: 'first' },
-            { label: 'Second', value: 'second' },
+            { label: 'Second', value: 'second' }
           ]}
           facet={{ title: 'Test Facet', field: {} }}
         />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();

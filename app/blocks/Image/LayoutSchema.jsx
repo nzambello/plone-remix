@@ -4,16 +4,16 @@ const Schema = {
   ...BlockSettingsSchema,
   fieldsets: [
     {
-      ...BlockSettingsSchema.fieldsets[0],
+      ...BlockSettingsSchema.fieldsets[0]
       // fields: [
       //   ...BlockSettingsSchema.fieldsets[0].fields,
       //   'minSize',
       //   'maxSize',
       // ],
-    },
+    }
   ],
   properties: {
-    ...BlockSettingsSchema.properties,
+    ...BlockSettingsSchema.properties
     /* TODO Enable when we have validators inplace */
     // minSize: {
     //   title: 'Min size',
@@ -25,7 +25,7 @@ const Schema = {
     //   description: 'Maximum image size',
     //   type: 'integer',
     // },
-  },
+  }
 };
 
 export default Schema;

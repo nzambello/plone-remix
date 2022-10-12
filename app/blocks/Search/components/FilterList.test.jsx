@@ -19,7 +19,7 @@ config.blocks.blocksConfig = {
     sidebarTab: 1,
     security: {
       addPermission: [],
-      view: [],
+      view: []
     },
     variations: [],
     extensions: {
@@ -33,12 +33,12 @@ config.blocks.blocksConfig = {
             schemaEnhancer: SelectFacet.schemaEnhancer,
             stateToValue: SelectFacet.stateToValue,
             valueToQuery: SelectFacet.valueToQuery,
-            filterListComponent: SelectFacetFilterListEntry,
-          },
-        ],
-      },
-    },
-  },
+            filterListComponent: SelectFacetFilterListEntry
+          }
+        ]
+      }
+    }
+  }
 };
 
 describe('FilterList', () => {
@@ -48,8 +48,8 @@ describe('FilterList', () => {
       content: { data: { '@id': 'myid' } },
       intl: {
         locale: 'en',
-        messages: {},
-      },
+        messages: {}
+      }
     });
     const data = {
       facets: [
@@ -57,10 +57,10 @@ describe('FilterList', () => {
           '@id': 'a',
           field: {
             value: 'portal_type',
-            label: 'Portal type',
-          },
-        },
-      ],
+            label: 'Portal type'
+          }
+        }
+      ]
     };
     const component = renderer.create(
       <Provider store={store}>
@@ -68,7 +68,7 @@ describe('FilterList', () => {
           data={data}
           facets={{ portal_type: ['Document', 'Folder'] }}
         />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();

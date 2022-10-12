@@ -4,24 +4,24 @@ import config from '@plone/volto/registry';
 const messages = defineMessages({
   listing: {
     id: 'Listing',
-    defaultMessage: 'Listing',
+    defaultMessage: 'Listing'
   },
   querystring: {
     id: 'Query',
-    defaultMessage: 'Query',
+    defaultMessage: 'Query'
   },
   more: {
     id: 'Link more',
-    defaultMessage: 'Link more',
+    defaultMessage: 'Link more'
   },
   LinkTitle: {
     id: 'Link title',
-    defaultMessage: 'Link Title',
+    defaultMessage: 'Link Title'
   },
   LinkTo: {
     id: 'Link to',
-    defaultMessage: 'Link to',
-  },
+    defaultMessage: 'Link to'
+  }
 });
 
 export const schemaListing = (props) => {
@@ -33,36 +33,36 @@ export const schemaListing = (props) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['querystring'],
+        fields: ['querystring']
       },
       ...(config.blocks.blocksConfig.listing.showLinkMore
         ? [
             {
               id: 'linkmore',
               title: intl.formatMessage(messages.more),
-              fields: ['linkTitle', 'linkHref'],
-            },
+              fields: ['linkTitle', 'linkHref']
+            }
           ]
-        : []),
+        : [])
     ],
 
     properties: {
       querystring: {
         title: intl.formatMessage(messages.querystring),
-        widget: 'querystring',
+        widget: 'querystring'
       },
       linkTitle: {
-        title: intl.formatMessage(messages.LinkTitle),
+        title: intl.formatMessage(messages.LinkTitle)
       },
       linkHref: {
         title: intl.formatMessage(messages.LinkTo),
         widget: 'object_browser',
         mode: 'link',
         selectedItemAttrs: ['Title', 'Description'],
-        allowExternals: true,
-      },
+        allowExternals: true
+      }
     },
-    required: [],
+    required: []
   };
 };
 

@@ -26,7 +26,7 @@ export default (WrappedComponent) => {
     return <WrappedComponent {...props} querystring={qs} />;
   }
   WithQueryString.displayName = `WithQueryString(${getDisplayName(
-    WrappedComponent,
+    WrappedComponent
   )})`;
   return WithQueryString;
 };

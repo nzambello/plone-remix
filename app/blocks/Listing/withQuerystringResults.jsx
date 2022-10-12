@@ -29,17 +29,17 @@ export default function withQuerystringResults(WrappedComponent) {
     const adaptedQuery = Object.assign(
       variation?.fullobjects ? { fullobjects: 1 } : { metadata_fields: '_all' },
       {
-        b_size: b_size,
+        b_size: b_size
       },
       ...copyFields.map((name) =>
         Object.keys(querystring).includes(name)
           ? { [name]: querystring[name] }
-          : {},
-      ),
+          : {}
+      )
     );
     const { currentPage, setCurrentPage } = usePagination(querystring, 1);
     const querystringResults = useSelector(
-      (state) => state.querystringsearch.subrequests,
+      (state) => state.querystringsearch.subrequests
     );
     const dispatch = useDispatch();
 
@@ -80,7 +80,7 @@ export default function withQuerystringResults(WrappedComponent) {
     useDeepCompareEffect(() => {
       if (hasQuery) {
         dispatch(
-          getQueryStringResults(initialPath, adaptedQuery, block, currentPage),
+          getQueryStringResults(initialPath, adaptedQuery, block, currentPage)
         );
       } else if (isImageGallery && !hasQuery) {
         // when used as image gallery, it doesn't need a query to list children
@@ -94,12 +94,12 @@ export default function withQuerystringResults(WrappedComponent) {
                 {
                   i: 'path',
                   o: 'plone.app.querystring.operation.string.relativePath',
-                  v: '',
-                },
-              ],
+                  v: ''
+                }
+              ]
             },
-            block,
-          ),
+            block
+          )
         );
       } else {
         dispatch(getContent(initialPath, null, null, currentPage));
@@ -111,7 +111,7 @@ export default function withQuerystringResults(WrappedComponent) {
       hasQuery,
       initialPath,
       dispatch,
-      currentPage,
+      currentPage
     ]);
 
     return (
@@ -132,7 +132,7 @@ export default function withQuerystringResults(WrappedComponent) {
   }
 
   WithQuerystringResults.displayName = `WithQuerystringResults(${getDisplayName(
-    WrappedComponent,
+    WrappedComponent
   )})`;
 
   return hoistNonReactStatics(WithQuerystringResults, WrappedComponent);

@@ -1,14 +1,14 @@
-import React from 'react'
-import cx from 'classnames'
+import React from 'react';
+import cx from 'classnames';
 
 export default ({
   data,
   detached,
   children
 }: {
-  data: { [key: string]: any }
-  detached?: boolean
-  children: React.ReactChildren
+  data: { [key: string]: any };
+  detached?: boolean;
+  children: React.ReactChildren;
 }) => {
   return (
     <div
@@ -32,5 +32,5 @@ export default ({
         {children}
       </div>
     </div>
-  )
-}
+  );
+};

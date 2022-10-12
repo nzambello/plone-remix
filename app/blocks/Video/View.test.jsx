@@ -15,9 +15,9 @@ config.blocks.blocksConfig = {
     sidebarTab: 1,
     security: {
       addPermission: [],
-      view: [],
-    },
-  },
+      view: []
+    }
+  }
 };
 
 test('renders a view video component', () => {
@@ -25,9 +25,9 @@ test('renders a view video component', () => {
     <View
       data={{
         '@type': 'video',
-        url: 'https://youtu.be/KqjeO_ekW3g',
+        url: 'https://youtu.be/KqjeO_ekW3g'
       }}
-    />,
+    />
   );
   const json = component.toJSON();
   expect(json).toMatchSnapshot();
@@ -40,9 +40,9 @@ test('renders a view video component with placeholder', () => {
         '@type': 'video',
         url: 'https://youtu.be/KqjeO_ekW3g',
         preview_image:
-          'https://github.com/plone/volto/raw/master/logos/volto-colorful.png',
+          'https://github.com/plone/volto/raw/master/logos/volto-colorful.png'
       }}
-    />,
+    />
   );
   const json = component.toJSON();
   expect(json).toMatchSnapshot();

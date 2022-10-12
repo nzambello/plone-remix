@@ -16,8 +16,8 @@ import { cloneDeep } from 'lodash';
 const messages = defineMessages({
   template: {
     id: 'Results template',
-    defaultMessage: 'Results template',
-  },
+    defaultMessage: 'Results template'
+  }
 });
 
 const SearchBlockEdit = (props) => {
@@ -28,7 +28,7 @@ const SearchBlockEdit = (props) => {
     selected,
     intl,
     onTriggerSearch,
-    querystring = {},
+    querystring = {}
   } = props;
   const { sortable_indexes = {} } = querystring;
 
@@ -39,24 +39,24 @@ const SearchBlockEdit = (props) => {
     name: 'listingBodyTemplate',
     items: config.blocks.blocksConfig.listing.variations,
     intl,
-    title: { id: intl.formatMessage(messages.template) },
+    title: { id: intl.formatMessage(messages.template) }
   });
   const listingVariations = config.blocks.blocksConfig?.listing?.variations;
   let activeItem = listingVariations.find(
-    (item) => item.id === data.listingBodyTemplate,
+    (item) => item.id === data.listingBodyTemplate
   );
   const listingSchemaEnhancer = activeItem?.schemaEnhancer;
   if (listingSchemaEnhancer)
     schema = listingSchemaEnhancer({
       schema: cloneDeep(schema),
       data,
-      intl,
+      intl
     });
   schema.properties.sortOnOptions.items = {
     choices: Object.keys(sortable_indexes).map((k) => [
       k,
-      sortable_indexes[k].title,
-    ]),
+      sortable_indexes[k].title
+    ])
   };
 
   const { query = {} } = data || {};
@@ -77,7 +77,7 @@ const SearchBlockEdit = (props) => {
           onChangeField={(id, value) => {
             onChangeBlock(block, {
               ...data,
-              [id]: value,
+              [id]: value
             });
           }}
           formData={data}

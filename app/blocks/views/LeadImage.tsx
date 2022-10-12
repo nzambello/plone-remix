@@ -1,6 +1,6 @@
-import type { BlockData } from 'types/blocks'
-import cx from 'classnames'
-import { flattenToAppURL } from '../../utils/urls'
+import type { BlockData } from 'types/blocks';
+import cx from 'classnames';
+import { flattenToAppURL } from '../../utils/urls';
 
 /**
  * View leadimage block class.
@@ -10,9 +10,9 @@ const LeadImageView = ({
   content,
   properties
 }: BlockData<{
-  align?: string
-  href?: string
-  target?: string
+  align?: string;
+  href?: string;
+  target?: string;
 }>) => (
   <p
     className={cx(
@@ -32,7 +32,7 @@ const LeadImageView = ({
               src={flattenToAppURL(properties.image.download)}
               alt={properties.image_caption || ''}
             />
-          )
+          );
           if (data?.href) {
             return (
               <a
@@ -42,16 +42,16 @@ const LeadImageView = ({
               >
                 {image}
               </a>
-            )
+            );
           } else {
-            return image
+            return image;
           }
         })()}
       </>
     )}
   </p>
-)
+);
 
-LeadImageView.displayName = 'LeadImage'
+LeadImageView.displayName = 'LeadImage';
 
-export default LeadImageView
+export default LeadImageView;

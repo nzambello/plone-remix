@@ -16,7 +16,7 @@ import {
   Option,
   DropdownIndicator,
   selectTheme,
-  customSelectStyles,
+  customSelectStyles
 } from '@plone/volto/components/manage/Widgets/SelectStyling';
 
 const identity = (a) => a;
@@ -42,7 +42,7 @@ class SelectWidget extends Component {
     value: PropTypes.oneOfType([
       PropTypes.object,
       PropTypes.string,
-      PropTypes.bool,
+      PropTypes.bool
     ]),
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func,
@@ -50,7 +50,7 @@ class SelectWidget extends Component {
     onEdit: PropTypes.func,
     onDelete: PropTypes.func,
     wrapped: PropTypes.bool,
-    querystring: PropTypes.object,
+    querystring: PropTypes.object
   };
 
   /**
@@ -62,10 +62,10 @@ class SelectWidget extends Component {
     description: null,
     required: false,
     items: {
-      vocabulary: null,
+      vocabulary: null
     },
     widgetOptions: {
-      vocabulary: null,
+      vocabulary: null
     },
     error: [],
     choices: [],
@@ -75,13 +75,13 @@ class SelectWidget extends Component {
     onBlur: () => {},
     onClick: () => {},
     onEdit: null,
-    onDelete: null,
+    onDelete: null
   };
 
   state = {
     selectedOption: this.props.value
       ? { label: this.props.value.title, value: this.props.value.value }
-      : {},
+      : {}
   };
 
   /**
@@ -110,7 +110,7 @@ class SelectWidget extends Component {
       this.props.getVocabulary({
         vocabNameOrURL: this.props.vocabBaseUrl,
         query: search,
-        start: offset,
+        start: offset
       });
       this.setState({ search });
 
@@ -122,8 +122,8 @@ class SelectWidget extends Component {
             : this.props.choices,
         hasMore: hasMore,
         additional: {
-          offset: offset === additional.offset ? offset + 25 : offset,
-        },
+          offset: offset === additional.offset ? offset + 25 : offset
+        }
       };
     }
     return null;
@@ -134,7 +134,7 @@ class SelectWidget extends Component {
     this.setState({ selectedOption });
     this.props.onChange(this.props.id, {
       value: selectedOption.value,
-      title: selectedOption.label,
+      title: selectedOption.label
     });
   };
 
@@ -151,7 +151,7 @@ class SelectWidget extends Component {
       onChange,
       // placeholder,
       querystring,
-      filterOptions = identity,
+      filterOptions = identity
     } = this.props;
     const isDisabled = false;
     const { indexes = [] } = querystring;
@@ -168,7 +168,7 @@ class SelectWidget extends Component {
           classNamePrefix="react-select"
           options={map(
             toPairs(
-              groupBy(toPairs(filterOptions(indexes)), (item) => item[1].group),
+              groupBy(toPairs(filterOptions(indexes)), (item) => item[1].group)
             ),
             (group) => ({
               label: group[0],
@@ -176,10 +176,10 @@ class SelectWidget extends Component {
                 filter(group[1], (item) => item[1].enabled),
                 (field) => ({
                   label: field[1].title,
-                  value: field[0],
-                }),
-              ),
-            }),
+                  value: field[0]
+                })
+              )
+            })
           )}
           styles={customSelectStyles}
           theme={selectTheme}
@@ -203,5 +203,5 @@ class SelectWidget extends Component {
 
 export default compose(
   withQueryString,
-  injectLazyLibs(['reactSelect']),
+  injectLazyLibs(['reactSelect'])
 )(SelectWidget);

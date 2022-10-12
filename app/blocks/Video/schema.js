@@ -3,20 +3,20 @@ import { defineMessages } from 'react-intl';
 const messages = defineMessages({
   Video: {
     id: 'Video',
-    defaultMessage: 'Video',
+    defaultMessage: 'Video'
   },
   VideoURL: {
     id: 'Video URL',
-    defaultMessage: 'Video URL',
+    defaultMessage: 'Video URL'
   },
   Preview_image: {
     id: 'Preview Image URL',
-    defaultMessage: 'Preview Image URL',
+    defaultMessage: 'Preview Image URL'
   },
   Alignment: {
     id: 'Alignment',
-    defaultMessage: 'Alignment',
-  },
+    defaultMessage: 'Alignment'
+  }
 });
 export const VideoBlockSchema = (props) => ({
   title: props.intl.formatMessage(messages.Video),
@@ -25,25 +25,25 @@ export const VideoBlockSchema = (props) => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['url', 'preview_image', 'align'],
-    },
+      fields: ['url', 'preview_image', 'align']
+    }
   ],
 
   properties: {
     url: {
       title: props.intl.formatMessage(messages.VideoURL),
-      widget: 'url',
+      widget: 'url'
     },
     preview_image: {
       title: props.intl.formatMessage(messages.Preview_image),
-      widget: 'url',
+      widget: 'url'
     },
     align: {
       title: props.intl.formatMessage(messages.Alignment),
-      widget: 'align',
-    },
+      widget: 'align'
+    }
   },
-  required: [],
+  required: []
 });
 
 export default VideoBlockSchema;

@@ -1,4 +1,4 @@
-import type { BlockData } from 'types/blocks'
+import type { BlockData } from 'types/blocks';
 
 /**
  * View title block component.
@@ -6,9 +6,13 @@ import type { BlockData } from 'types/blocks'
  * @extends Component
  */
 const TitleBlockView = ({ properties, metadata }: BlockData) => {
-  return <h1 className="documentFirstHeading">{(metadata || properties)['title'] || ''}</h1>
-}
+  return (
+    <h1 className="documentFirstHeading">
+      {(metadata || properties)['title'] || ''}
+    </h1>
+  );
+};
 
-TitleBlockView.displayName = 'TitleBlock'
+TitleBlockView.displayName = 'TitleBlock';
 
-export default TitleBlockView
+export default TitleBlockView;

@@ -43,7 +43,7 @@ const SummaryTemplate = ({ items, linkTitle, linkHref, isEditMode }) => {
 SummaryTemplate.propTypes = {
   items: PropTypes.arrayOf(PropTypes.any).isRequired,
   linkMore: PropTypes.any,
-  isEditMode: PropTypes.bool,
+  isEditMode: PropTypes.bool
 };
 
 export default SummaryTemplate;

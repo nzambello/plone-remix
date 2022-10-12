@@ -6,7 +6,7 @@ import { compose } from 'redux';
 import { Icon } from '@plone/volto/components';
 import {
   Option,
-  DropdownIndicator,
+  DropdownIndicator
 } from '@plone/volto/components/manage/Widgets/SelectStyling';
 import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 import { selectTheme, sortOnSelectStyles } from './SelectStyling';
@@ -17,20 +17,20 @@ import downSVG from '@plone/volto/icons/sort-down.svg';
 const messages = defineMessages({
   noSelection: {
     id: 'No selection',
-    defaultMessage: 'No selection',
+    defaultMessage: 'No selection'
   },
   sortOn: {
     id: 'Sort on',
-    defaultMessage: 'Sort on',
+    defaultMessage: 'Sort on'
   },
   ascending: {
     id: 'Ascending',
-    defaultMessage: 'Ascending',
+    defaultMessage: 'Ascending'
   },
   descending: {
     id: 'Descending',
-    defaultMessage: 'Descending',
-  },
+    defaultMessage: 'Descending'
+  }
 });
 
 const SortOn = (props) => {
@@ -43,7 +43,7 @@ const SortOn = (props) => {
     setSortOrder,
     isEditMode,
     querystring = {},
-    intl,
+    intl
   } = props;
   const { sortable_indexes } = querystring;
   const Select = reactSelect.default;
@@ -56,7 +56,7 @@ const SortOn = (props) => {
     label:
       activeSortOn && sortable_indexes
         ? sortable_indexes[activeSortOn]?.title
-        : activeSortOn || intl.formatMessage(messages.noSelection),
+        : activeSortOn || intl.formatMessage(messages.noSelection)
   };
 
   return (
@@ -77,8 +77,8 @@ const SortOn = (props) => {
           options={[
             ...sortOnOptions.map((k) => ({
               value: k,
-              label: sortable_indexes[k]?.title || k,
-            })),
+              label: sortable_indexes[k]?.title || k
+            }))
           ]}
           value={value}
           onChange={(data) => {
@@ -92,7 +92,7 @@ const SortOn = (props) => {
         compact
         title={intl.formatMessage(messages.ascending)}
         className={cx({
-          active: sortOrder === 'ascending',
+          active: sortOrder === 'ascending'
         })}
         onClick={() => {
           !isEditMode && setSortOrder('ascending');
@@ -106,7 +106,7 @@ const SortOn = (props) => {
         compact
         title={intl.formatMessage(messages.descending)}
         className={cx({
-          active: sortOrder === 'descending',
+          active: sortOrder === 'descending'
         })}
         onClick={() => {
           !isEditMode && setSortOrder('descending');

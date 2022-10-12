@@ -9,12 +9,12 @@ import config from '@plone/volto/registry';
 const messages = defineMessages({
   currentFilters: {
     id: 'Current filters applied',
-    defaultMessage: 'Current filters applied',
+    defaultMessage: 'Current filters applied'
   },
   clearFilters: {
     id: 'Clear filters',
-    defaultMessage: 'Clear filters',
-  },
+    defaultMessage: 'Clear filters'
+  }
 });
 
 /**
@@ -28,12 +28,11 @@ const FilterList = (props) => {
 
   const totalFilters = definedFacets.filter(
     ({ field }) =>
-      field && Object.keys(facets).includes(field.value) && facets[field.value],
+      field && Object.keys(facets).includes(field.value) && facets[field.value]
   ).length;
 
-  const {
-    types: facetWidgetTypes,
-  } = config.blocks.blocksConfig.search.extensions.facetWidgets;
+  const { types: facetWidgetTypes } =
+    config.blocks.blocksConfig.search.extensions.facetWidgets;
 
   const intl = useIntl();
 
@@ -65,9 +64,8 @@ const FilterList = (props) => {
       <Accordion.Content className="filter-list-content" active={isOpened}>
         <div className="filter-list">
           {data.facets?.map((facetSettings, i) => {
-            const {
-              filterListComponent: FilterListComponent,
-            } = resolveExtension('type', facetWidgetTypes, facetSettings);
+            const { filterListComponent: FilterListComponent } =
+              resolveExtension('type', facetWidgetTypes, facetSettings);
             const facet = facetSettings?.field?.value;
             if (!facet) return null;
 

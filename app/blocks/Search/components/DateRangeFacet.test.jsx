@@ -10,7 +10,7 @@ const mockStore = configureStore();
 jest.mock('@plone/volto/helpers/Loadable/Loadable');
 beforeAll(
   async () =>
-    await require('@plone/volto/helpers/Loadable/Loadable').__setLoadables(),
+    await require('@plone/volto/helpers/Loadable/Loadable').__setLoadables()
 );
 
 describe('DateRangeFaceg', () => {
@@ -20,13 +20,13 @@ describe('DateRangeFaceg', () => {
       content: { data: { '@id': 'myid' } },
       intl: {
         locale: 'en',
-        messages: {},
-      },
+        messages: {}
+      }
     });
     const { container } = render(
       <Provider store={store}>
         <DateRangeFacet facet={{ title: 'Test Facet', field: {} }} />
-      </Provider>,
+      </Provider>
     );
     await waitFor(() => screen.getByText('Test Facet'));
     expect(container).toMatchSnapshot();

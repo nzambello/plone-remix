@@ -20,7 +20,7 @@ import { createContent } from '@plone/volto/actions';
 import {
   flattenToAppURL,
   getBaseUrl,
-  isInternalURL,
+  isInternalURL
 } from '@plone/volto/helpers';
 
 import imageBlockSVG from '@plone/volto/components/manage/Blocks/Image/block-image.svg';
@@ -34,8 +34,8 @@ const Dropzone = loadable(() => import('react-dropzone'));
 const messages = defineMessages({
   ImageBlockInputPlaceholder: {
     id: 'Browse the site, drop an image, or type an URL',
-    defaultMessage: 'Browse the site, drop an image, or type an URL',
-  },
+    defaultMessage: 'Browse the site, drop an image, or type an URL'
+  }
 });
 
 /**
@@ -57,7 +57,7 @@ class Edit extends Component {
     content: PropTypes.objectOf(PropTypes.any).isRequired,
     request: PropTypes.shape({
       loading: PropTypes.bool,
-      loaded: PropTypes.bool,
+      loaded: PropTypes.bool
     }).isRequired,
     pathname: PropTypes.string.isRequired,
     onChangeBlock: PropTypes.func.isRequired,
@@ -67,13 +67,13 @@ class Edit extends Component {
     onFocusNextBlock: PropTypes.func.isRequired,
     handleKeyDown: PropTypes.func.isRequired,
     createContent: PropTypes.func.isRequired,
-    openObjectBrowser: PropTypes.func.isRequired,
+    openObjectBrowser: PropTypes.func.isRequired
   };
 
   state = {
     uploading: false,
     url: '',
-    dragging: false,
+    dragging: false
   };
 
   /**
@@ -89,12 +89,12 @@ class Edit extends Component {
       this.state.uploading
     ) {
       this.setState({
-        uploading: false,
+        uploading: false
       });
       this.props.onChangeBlock(this.props.block, {
         ...this.props.data,
         url: nextProps.content['@id'],
-        alt: '',
+        alt: ''
       });
     }
   }
@@ -122,7 +122,7 @@ class Edit extends Component {
     e.stopPropagation();
     const file = e.target.files[0];
     this.setState({
-      uploading: true,
+      uploading: true
     });
     readAsDataURL(file).then((data) => {
       const fields = data.match(/^data:(.*);(.*),(.*)$/);
@@ -135,10 +135,10 @@ class Edit extends Component {
             data: fields[3],
             encoding: fields[2],
             'content-type': fields[1],
-            filename: file.name,
-          },
+            filename: file.name
+          }
         },
-        this.props.block,
+        this.props.block
       );
     });
   };
@@ -151,7 +151,7 @@ class Edit extends Component {
    */
   onChangeUrl = ({ target }) => {
     this.setState({
-      url: target.value,
+      url: target.value
     });
   };
 
@@ -164,7 +164,7 @@ class Edit extends Component {
   onSubmitUrl = () => {
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
-      url: flattenToAppURL(this.state.url),
+      url: flattenToAppURL(this.state.url)
     });
   };
 
@@ -176,7 +176,7 @@ class Edit extends Component {
    */
   onDrop = (file) => {
     this.setState({
-      uploading: true,
+      uploading: true
     });
 
     readAsDataURL(file[0]).then((data) => {
@@ -190,10 +190,10 @@ class Edit extends Component {
             data: fields[3],
             encoding: fields[2],
             'content-type': fields[1],
-            filename: file[0].name,
-          },
+            filename: file[0].name
+          }
         },
-        this.props.block,
+        this.props.block
       );
     });
   };
@@ -241,9 +241,9 @@ class Edit extends Component {
         className={cx(
           'block image align',
           {
-            center: !Boolean(data.align),
+            center: !Boolean(data.align)
           },
-          data.align,
+          data.align
         )}
       >
         {data.url ? (
@@ -252,7 +252,7 @@ class Edit extends Component {
               'full-width': data.align === 'full',
               large: data.size === 'l',
               medium: data.size === 'm',
-              small: data.size === 's',
+              small: data.size === 's'
             })}
             src={
               isInternalURL(data.url)
@@ -262,7 +262,7 @@ class Edit extends Component {
                       return `${flattenToAppURL(data.url)}/@@images/image`;
                     if (data.size === 'm')
                       return `${flattenToAppURL(
-                        data.url,
+                        data.url
                       )}/@@images/image/preview`;
                     if (data.size === 's')
                       return `${flattenToAppURL(data.url)}/@@images/image/mini`;
@@ -314,7 +314,7 @@ class Edit extends Component {
                                 {...getInputProps({
                                   type: 'file',
                                   onChange: this.onUploadImage,
-                                  style: { display: 'none' },
+                                  style: { display: 'none' }
                                 })}
                               />
                             </label>
@@ -381,8 +381,8 @@ export default compose(
   connect(
     (state, ownProps) => ({
       request: state.content.subrequests[ownProps.block] || {},
-      content: state.content.subrequests[ownProps.block]?.data,
+      content: state.content.subrequests[ownProps.block]?.data
     }),
-    { createContent },
-  ),
+    { createContent }
+  )
 )(Edit);

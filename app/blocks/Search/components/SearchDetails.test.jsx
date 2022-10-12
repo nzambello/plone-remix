@@ -14,13 +14,13 @@ describe('SearchDetails', () => {
       content: { data: { '@id': 'myid' } },
       intl: {
         locale: 'en',
-        messages: {},
-      },
+        messages: {}
+      }
     });
     const component = renderer.create(
       <Provider store={store}>
         <SearchDetails text="test" total="10"></SearchDetails>
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();

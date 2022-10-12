@@ -59,7 +59,7 @@ const View = ({ data, tocEntries }) => {
  * @static
  */
 View.propTypes = {
-  properties: PropTypes.objectOf(PropTypes.any).isRequired,
+  properties: PropTypes.objectOf(PropTypes.any).isRequired
 };
 
 export default injectIntl(View);

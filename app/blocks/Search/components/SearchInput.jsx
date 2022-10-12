@@ -7,8 +7,8 @@ import loupeSVG from '@plone/volto/icons/zoom.svg';
 const messages = defineMessages({
   search: {
     id: 'Search',
-    defaultMessage: 'Search',
-  },
+    defaultMessage: 'Search'
+  }
 });
 
 const SearchInput = (props) => {

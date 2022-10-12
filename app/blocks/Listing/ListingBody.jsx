@@ -20,7 +20,7 @@ const ListingBody = withQuerystringResults((props) => {
     prevBatch,
     nextBatch,
     isFolderContentsListing,
-    hasLoaded,
+    hasLoaded
   } = props;
 
   let ListingBodyTemplate;
@@ -30,7 +30,7 @@ const ListingBody = withQuerystringResults((props) => {
 
   if (data.template && !data.variation) {
     const legacyTemplateConfig = variations.find(
-      (item) => item.id === data.template,
+      (item) => item.id === data.template
     );
     ListingBodyTemplate = legacyTemplateConfig.template;
   } else {
@@ -63,13 +63,13 @@ const ListingBody = withQuerystringResults((props) => {
               content: <Icon name={paginationLeftSVG} size="18px" />,
               icon: true,
               'aria-disabled': !prevBatch,
-              className: !prevBatch ? 'disabled' : null,
+              className: !prevBatch ? 'disabled' : null
             }}
             nextItem={{
               content: <Icon name={paginationRightSVG} size="18px" />,
               icon: true,
               'aria-disabled': !nextBatch,
-              className: !nextBatch ? 'disabled' : null,
+              className: !nextBatch ? 'disabled' : null
             }}
           />
         </div>

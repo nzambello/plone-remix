@@ -1,13 +1,14 @@
-import tlds from 'tlds'
+import tlds from 'tlds';
 
 export const mailRegex = () =>
-  /^((mailto:[^<>()/[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
+  /^((mailto:[^<>()/[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
-export const telRegex = () => /^[tel:]*[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/g
+export const telRegex = () =>
+  /^[tel:]*[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/g;
 
 const v4 =
-  '(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])(?:\\.(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])){3}'
-const v6seg = '[0-9a-fA-F]{1,4}'
+  '(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])(?:\\.(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])){3}';
+const v6seg = '[0-9a-fA-F]{1,4}';
 const v6 = `
 (
 (?:${v6seg}:){7}(?:${v6seg}|:)|                                // 1:2:3:4:5:6:7::  1:2:3:4:5:6:7:8
@@ -22,29 +23,38 @@ const v6 = `
 `
   .replace(/\s*\/\/.*$/gm, '')
   .replace(/\n/g, '')
-  .trim()
+  .trim();
 
 const ipRegex = (opts?: { exact: any }) =>
-  opts && opts.exact ? new RegExp(`(?:^${v4}$)|(?:^${v6}$)`) : new RegExp(`(?:${v4})|(?:${v6})`, 'g')
+  opts && opts.exact
+    ? new RegExp(`(?:^${v4}$)|(?:^${v6}$)`)
+    : new RegExp(`(?:${v4})|(?:${v6})`, 'g');
 
-ipRegex.v4 = (opts?: { exact: any }) => (opts && opts.exact ? new RegExp(`^${v4}$`) : new RegExp(v4, 'g'))
-ipRegex.v6 = (opts?: { exact: any }) => (opts && opts.exact ? new RegExp(`^${v6}$`) : new RegExp(v6, 'g'))
+ipRegex.v4 = (opts?: { exact: any }) =>
+  opts && opts.exact ? new RegExp(`^${v4}$`) : new RegExp(v4, 'g');
+ipRegex.v6 = (opts?: { exact: any }) =>
+  opts && opts.exact ? new RegExp(`^${v6}$`) : new RegExp(v6, 'g');
 
 export const urlRegex = (_opts?: any) => {
-  const opts = Object.assign({ strict: true }, _opts)
-  const protocol = `(?:(?:[a-z]+:)?//)${opts.strict ? '' : '?'}`
-  const auth = '(?:\\S+(?::\\S*)?@)?'
-  const ip = ipRegex.v4().source
-  const host = '(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)'
-  const domain = '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*'
+  const opts = Object.assign({ strict: true }, _opts);
+  const protocol = `(?:(?:[a-z]+:)?//)${opts.strict ? '' : '?'}`;
+  const auth = '(?:\\S+(?::\\S*)?@)?';
+  const ip = ipRegex.v4().source;
+  const host = '(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)';
+  const domain =
+    '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*';
   const tld = `(?:\\.${
     opts.strict
       ? '(?:[a-z\\u00a1-\\uffff]{2,})'
-      : `(?:${tlds.sort((a: string | any[], b: string | any[]) => b.length - a.length).join('|')})`
-  })\\.?`
-  const port = '(?::\\d{2,5})?'
-  const path = '(?:[/?#][^\\s"]*)?'
-  const regex = `(?:${protocol}|www\\.)${auth}(?:localhost|${ip}|${host}${domain}${tld})${port}${path}`
+      : `(?:${tlds
+          .sort((a: string | any[], b: string | any[]) => b.length - a.length)
+          .join('|')})`
+  })\\.?`;
+  const port = '(?::\\d{2,5})?';
+  const path = '(?:[/?#][^\\s"]*)?';
+  const regex = `(?:${protocol}|www\\.)${auth}(?:localhost|${ip}|${host}${domain}${tld})${port}${path}`;
 
-  return opts.exact ? new RegExp(`(?:^${regex}$)`, 'i') : new RegExp(regex, 'ig')
-}
+  return opts.exact
+    ? new RegExp(`(?:^${regex}$)`, 'i')
+    : new RegExp(regex, 'ig');
+};

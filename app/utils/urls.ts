@@ -3,9 +3,9 @@
  * @module utils/urls
  */
 
-import memoize from 'lodash.memoize'
-import { urlRegex, telRegex, mailRegex } from './urlRegex'
-import config from '../config'
+import memoize from 'lodash.memoize';
+import { urlRegex, telRegex, mailRegex } from './urlRegex';
+import config from '../config';
 
 /**
  * @source https://github.com/sindresorhus/prepend-http
@@ -24,11 +24,11 @@ import config from '../config'
  * ```
  */
 function prependHttp(url: string, https = true): string {
-  url = url.trim()
+  url = url.trim();
   if (/^\.*\/|^(?!localhost)\w+?:/.test(url)) {
-    return url
+    return url;
   }
-  return url.replace(/^(?!(?:\w+?:)?\/\/)/, https ? 'https://' : 'http://')
+  return url.replace(/^(?!(?:\w+?:)?\/\/)/, https ? 'https://' : 'http://');
 }
 
 /**
@@ -45,8 +45,8 @@ function prependHttp(url: string, https = true): string {
  * // => 3
  */
 function last(array: Array<any>): any {
-  var length = array == null ? 0 : array.length
-  return length ? array[length - 1] : undefined
+  var length = array == null ? 0 : array.length;
+  return length ? array[length - 1] : undefined;
 }
 
 /**
@@ -56,24 +56,27 @@ function last(array: Array<any>): any {
  * @return {string} Base url of content object.
  */
 export const getBaseUrl = memoize((url: string) => {
-  const { settings } = config
-  if (url === undefined) return
+  const { settings } = config;
+  if (url === undefined) return;
 
   // We allow settings.nonContentRoutes to have strings (that are supposed to match
   // ending strings of pathnames, so we are converting them to RegEx to match also
   const normalized_nonContentRoutes = settings.nonContentRoutes.map((item) => {
     if (typeof item === 'string') {
-      return new RegExp(item + '$')
+      return new RegExp(item + '$');
     } else {
-      return item
+      return item;
     }
-  })
+  });
 
-  let adjustedUrl = normalized_nonContentRoutes.reduce((acc: string, item: any) => acc.replace(item, ''), url)
+  let adjustedUrl = normalized_nonContentRoutes.reduce(
+    (acc: string, item: any) => acc.replace(item, ''),
+    url
+  );
 
-  adjustedUrl = adjustedUrl || '/'
-  return adjustedUrl === '/' ? '' : adjustedUrl
-})
+  adjustedUrl = adjustedUrl || '/';
+  return adjustedUrl === '/' ? '' : adjustedUrl;
+});
 
 /**
  * Get parent url.
@@ -82,8 +85,8 @@ export const getBaseUrl = memoize((url: string) => {
  * @return {string} Parent url of content object.
  */
 export const getParentUrl = memoize((url: string) => {
-  return url.substring(0, url.lastIndexOf('/'))
-})
+  return url.substring(0, url.lastIndexOf('/'));
+});
 
 /**
  * Get id from url.
@@ -92,7 +95,7 @@ export const getParentUrl = memoize((url: string) => {
  * @return {string} Id of content object.
  */
 export function getId(url: string): string {
-  return last(url.replace(/\?.*$/, '').split('/'))
+  return last(url.replace(/\?.*$/, '').split('/'));
 }
 
 /**
@@ -102,13 +105,23 @@ export function getId(url: string): string {
  * @return {string} View of content object.
  */
 export function getView(url: string): string {
-  const view = last(url.replace(/\?.*$/, '').split('/'))
+  const view = last(url.replace(/\?.*$/, '').split('/'));
   if (
-    ['add', 'layout', 'contents', 'edit', 'delete', 'diff', 'history', 'sharing', 'controlpanel'].indexOf(view) === -1
+    [
+      'add',
+      'layout',
+      'contents',
+      'edit',
+      'delete',
+      'diff',
+      'history',
+      'sharing',
+      'controlpanel'
+    ].indexOf(view) === -1
   ) {
-    return 'view'
+    return 'view';
   }
-  return view === 'layout' ? 'edit' : view
+  return view === 'layout' ? 'edit' : view;
 }
 
 /**
@@ -121,8 +134,14 @@ export function getView(url: string): string {
  * @returns {string} Flattened URL to the app server
  */
 export function flattenToAppURL(url: string): string {
-  const { settings } = config
-  return url && url.replace(settings.internalApiPath, '').replace(settings.apiPath, '').replace(settings.publicURL, '')
+  const { settings } = config;
+  return (
+    url &&
+    url
+      .replace(settings.internalApiPath, '')
+      .replace(settings.apiPath, '')
+      .replace(settings.publicURL, '')
+  );
 }
 /**
  * Given a URL it remove the querystring from the URL.
@@ -131,7 +150,7 @@ export function flattenToAppURL(url: string): string {
  * @returns {string} URL without querystring
  */
 export function stripQuerystring(url: string): string {
-  return url.replace(/\?.*$/, '')
+  return url.replace(/\?.*$/, '');
 }
 
 /**
@@ -142,8 +161,8 @@ export function stripQuerystring(url: string): string {
  * @returns {string} public URL
  */
 export function toPublicURL(url: string): string {
-  const { settings } = config
-  return settings.publicURL.concat(flattenToAppURL(url))
+  const { settings } = config;
+  return settings.publicURL.concat(flattenToAppURL(url));
 }
 
 /**
@@ -153,17 +172,18 @@ export function toPublicURL(url: string): string {
  * @returns {boolean} true if the current view is a cms ui view
  */
 export const isCmsUi = memoize((currentPathname: string) => {
-  const { settings } = config
-  const fullPath = currentPathname.replace(/\?.*$/, '')
+  const { settings } = config;
+  const fullPath = currentPathname.replace(/\?.*$/, '');
   // WARNING:
   // not working properly for paths like /editors or similar
   // because the regexp test does not take that into account
   // https://github.com/plone/volto/issues/870
   return settings.nonContentRoutes.reduce(
-    (acc: any, route: string | RegExp) => acc || new RegExp(route).test(`/${fullPath}`),
+    (acc: any, route: string | RegExp) =>
+      acc || new RegExp(route).test(`/${fullPath}`),
     false
-  )
-})
+  );
+});
 
 /**
  * Flatten to app server HTML - Given a text if it contains some urls that starts
@@ -175,10 +195,12 @@ export const isCmsUi = memoize((currentPathname: string) => {
  * @returns {string} Same HTML with Flattened URLs to the app server
  */
 export function flattenHTMLToAppURL(html: string): string {
-  const { settings } = config
+  const { settings } = config;
   return settings.internalApiPath
-    ? html.replace(new RegExp(settings.internalApiPath, 'g'), '').replace(new RegExp(settings.apiPath, 'g'), '')
-    : html.replace(new RegExp(settings.apiPath, 'g'), '')
+    ? html
+        .replace(new RegExp(settings.internalApiPath, 'g'), '')
+        .replace(new RegExp(settings.apiPath, 'g'), '')
+    : html.replace(new RegExp(settings.apiPath, 'g'), '');
 }
 
 /**
@@ -188,8 +210,10 @@ export function flattenHTMLToAppURL(html: string): string {
  * @returns {string} New URL with app
  */
 export function addAppURL(url: string): string {
-  const { settings } = config
-  return url.indexOf(settings.apiPath) === 0 ? url : `${settings.apiPath}${url}`
+  const { settings } = config;
+  return url.indexOf(settings.apiPath) === 0
+    ? url
+    : `${settings.apiPath}${url}`;
 }
 
 /**
@@ -202,28 +226,28 @@ export function addAppURL(url: string): string {
  * @returns {string} New URL with the backend URL
  */
 export function expandToBackendURL(path: string): string {
-  const { settings } = config
-  const APISUFIX = settings.legacyTraverse ? '' : '/++api++'
-  let adjustedPath
+  const { settings } = config;
+  const APISUFIX = settings.legacyTraverse ? '' : '/++api++';
+  let adjustedPath;
   if (path.startsWith('http://') || path.startsWith('https://')) {
     // flattenToAppURL first if we get a full URL
-    adjustedPath = flattenToAppURL(path)
+    adjustedPath = flattenToAppURL(path);
   } else {
     // Next adds a / in front if not a full URL to make sure it's a valid relative path
-    adjustedPath = path[0] !== '/' ? `/${path}` : path
+    adjustedPath = path[0] !== '/' ? `/${path}` : path;
   }
 
-  let apiPath = ''
+  let apiPath = '';
   //  if (settings.internalApiPath && __SERVER__) {
   //    apiPath = settings.internalApiPath;
   //  } else if (settings.apiPath) {
   //    apiPath = settings.apiPath;
   //  }
   if (settings.apiPath) {
-    apiPath = settings.apiPath
+    apiPath = settings.apiPath;
   }
 
-  return `${apiPath}${APISUFIX}${adjustedPath}`
+  return `${apiPath}${APISUFIX}${adjustedPath}`;
 }
 
 /**
@@ -233,7 +257,7 @@ export function expandToBackendURL(path: string): string {
  * @returns {boolean} True if internal url
  */
 export function isInternalURL(url: string): boolean {
-  const { settings } = config
+  const { settings } = config;
   return (
     !!url &&
     (url.includes(settings.publicURL) ||
@@ -242,7 +266,7 @@ export function isInternalURL(url: string): boolean {
       url.charAt(0) === '/' ||
       url.charAt(0) === '.' ||
       url.startsWith('#'))
-  )
+  );
 }
 
 /**
@@ -252,7 +276,7 @@ export function isInternalURL(url: string): boolean {
  * @returns {boolean} True if is a valid url
  */
 export function isUrl(url: string): boolean {
-  return urlRegex().test(url)
+  return urlRegex().test(url);
 }
 
 /**
@@ -262,7 +286,7 @@ export function isUrl(url: string): boolean {
  * @returns {string} URL with the protocol
  */
 export function normalizeUrl(url: string): string {
-  return prependHttp(url)
+  return prependHttp(url);
 }
 
 /**
@@ -272,29 +296,29 @@ export function normalizeUrl(url: string): string {
  * @returns {string} URL without the protocol part
  */
 export function removeProtocol(url: string): string {
-  return url.replace('https://', '').replace('http://', '')
+  return url.replace('https://', '').replace('http://', '');
 }
 
 export function isMail(text: string) {
-  return mailRegex().test(text)
+  return mailRegex().test(text);
 }
 
 export function isTelephone(text: string) {
-  return telRegex().test(text)
+  return telRegex().test(text);
 }
 
 export function normaliseMail(email: string) {
   if (email.toLowerCase().startsWith('mailto:')) {
-    return email
+    return email;
   }
-  return `mailto:${email}`
+  return `mailto:${email}`;
 }
 
 export function normalizeTelephone(tel: string) {
   if (tel.toLowerCase().startsWith('tel:')) {
-    return tel
+    return tel;
   }
-  return `tel:${tel}`
+  return `tel:${tel}`;
 }
 
 export function checkAndNormalizeUrl(url: string) {
@@ -303,25 +327,25 @@ export function checkAndNormalizeUrl(url: string) {
     isTelephone: false,
     url: url,
     isValid: true
-  }
+  };
   if (URLUtils.isMail(URLUtils.normaliseMail(url))) {
     //Mail
-    res.isMail = true
-    res.url = URLUtils.normaliseMail(url)
+    res.isMail = true;
+    res.url = URLUtils.normaliseMail(url);
   } else if (URLUtils.isTelephone(url)) {
     //Phone
-    res.isTelephone = true
-    res.url = URLUtils.normalizeTelephone(url)
+    res.isTelephone = true;
+    res.url = URLUtils.normalizeTelephone(url);
   } else {
     //url
     if (!res.url.startsWith('/') && !res.url.startsWith('#')) {
-      res.url = URLUtils.normalizeUrl(url)
+      res.url = URLUtils.normalizeUrl(url);
       if (!URLUtils.isUrl(res.url)) {
-        res.isValid = false
+        res.isValid = false;
       }
     }
   }
-  return res
+  return res;
 }
 
 export const URLUtils = {
@@ -332,4 +356,4 @@ export const URLUtils = {
   isMail,
   isUrl,
   checkAndNormalizeUrl
-}
+};

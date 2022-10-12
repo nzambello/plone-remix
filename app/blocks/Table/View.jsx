@@ -38,7 +38,7 @@ const View = ({ data }) =>
                   ? redraft(
                       cell.value,
                       config.settings.richtextViewSettings.ToHTMLRenderers,
-                      config.settings.richtextViewSettings.ToHTMLOptions,
+                      config.settings.richtextViewSettings.ToHTMLOptions
                     )
                   : '\u00A0'}
               </Table.Cell>
@@ -55,7 +55,7 @@ const View = ({ data }) =>
  * @static
  */
 View.propTypes = {
-  data: PropTypes.objectOf(PropTypes.any).isRequired,
+  data: PropTypes.objectOf(PropTypes.any).isRequired
 };
 
 export default View;

@@ -8,7 +8,7 @@ import Edit from './Edit';
 jest.mock('@plone/volto/helpers/Loadable/Loadable');
 beforeAll(
   async () =>
-    await require('@plone/volto/helpers/Loadable/Loadable').__setLoadables(),
+    await require('@plone/volto/helpers/Loadable/Loadable').__setLoadables()
 );
 
 const mockStore = configureStore();
@@ -17,8 +17,8 @@ test('renders an edit table block component', () => {
   const store = mockStore({
     intl: {
       locale: 'en',
-      messages: {},
-    },
+      messages: {}
+    }
   });
   const component = renderer.create(
     <Provider store={store}>
@@ -37,7 +37,7 @@ test('renders an edit table block component', () => {
         onMutateBlock={() => {}}
         index={1}
       />
-    </Provider>,
+    </Provider>
   );
   const json = component.toJSON();
   expect(json).toMatchSnapshot();

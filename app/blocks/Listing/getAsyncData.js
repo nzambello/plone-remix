@@ -9,10 +9,10 @@ export default ({ dispatch, data, path }) => {
           ...data.querystring,
           ...(data.variation?.fullobjects
             ? { fullobjects: 1 }
-            : { metadata_fields: '_all' }),
+            : { metadata_fields: '_all' })
         },
-        data.block,
-      ),
-    ),
+        data.block
+      )
+    )
   ];
 };

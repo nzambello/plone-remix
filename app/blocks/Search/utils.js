@@ -1,10 +1,10 @@
 export const NONVALUE_OPERATIONS = new Set([
   'plone.app.querystring.operation.boolean.isFalse',
-  'plone.app.querystring.operation.boolean.isTrue',
+  'plone.app.querystring.operation.boolean.isTrue'
 ]);
 
 export const DATE_OPERATIONS = new Set([
-  'plone.app.querystring.operation.date.between',
+  'plone.app.querystring.operation.date.between'
 ]);
 
 export const hasNonValueOperation = (ops) => {

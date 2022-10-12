@@ -9,12 +9,12 @@ import videoSVG from '@plone/volto/icons/videocamera.svg';
 const messages = defineMessages({
   Video: {
     id: 'Video',
-    defaultMessage: 'Video',
+    defaultMessage: 'Video'
   },
   NoVideo: {
     id: 'No Video selected',
-    defaultMessage: 'No Video selected',
-  },
+    defaultMessage: 'No Video selected'
+  }
 });
 
 const VideoSidebar = (props) => {
@@ -36,7 +36,7 @@ const VideoSidebar = (props) => {
           onChangeField={(id, value) => {
             onChangeBlock(block, {
               ...data,
-              [id]: value,
+              [id]: value
             });
           }}
           formData={data}

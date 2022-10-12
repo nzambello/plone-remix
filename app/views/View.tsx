@@ -1,27 +1,27 @@
-import { PloneContent } from 'plone-restapi-client/dist/content'
-import { hasBlocksData } from '~/blocks/helpers'
-import RenderBlocks from '~/blocks/RenderBlocks'
+import { PloneContent } from 'plone-restapi-client/dist/content';
+import { hasBlocksData } from '~/blocks/helpers';
+import RenderBlocks from '~/blocks/RenderBlocks';
 
 const View = ({
   content
 }: {
   content: PloneContent & {
-    subtitle?: string
+    subtitle?: string;
     image: {
-      'content-type': string
-      download: string
+      'content-type': string;
+      download: string;
       scales: {
         [key: string]: {
-          download: string
-          width: number
-          height: number
-        }
-      }
-    }
+          download: string;
+          width: number;
+          height: number;
+        };
+      };
+    };
     text: {
-      data: string
-    }
-  }
+      data: string;
+    };
+  };
 }) => {
   return hasBlocksData(content) ? (
     <div id="page-document" className="viewwrapper blocks-view">
@@ -35,7 +35,9 @@ const View = ({
           {content.subtitle && ` - ${content.subtitle}`}
         </h1>
       )}
-      {content.description && <p className="documentDescription">{content.description}</p>}
+      {content.description && (
+        <p className="documentDescription">{content.description}</p>
+      )}
       {content.image && (
         <img
           className="documentImage"
@@ -56,7 +58,7 @@ const View = ({
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default View
+export default View;

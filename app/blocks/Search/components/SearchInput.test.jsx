@@ -14,8 +14,8 @@ describe('SearchInput', () => {
       content: { data: { '@id': 'myid' } },
       intl: {
         locale: 'en',
-        messages: {},
-      },
+        messages: {}
+      }
     });
     const component = renderer.create(
       <Provider store={store}>
@@ -23,7 +23,7 @@ describe('SearchInput', () => {
           data={{ searchInputPrompt: 'Search!!!' }}
           searchText="hello"
         />
-      </Provider>,
+      </Provider>
     );
     const json = component.toJSON();
     expect(json).toMatchSnapshot();

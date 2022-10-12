@@ -5,12 +5,12 @@ import { defineMessages, useIntl } from 'react-intl';
 const messages = defineMessages({
   yes: {
     id: 'yes',
-    defaultMessage: 'Yes',
+    defaultMessage: 'Yes'
   },
   no: {
     id: 'no',
-    defaultMessage: 'No',
-  },
+    defaultMessage: 'No'
+  }
 });
 
 function DateRangeFacetFilterListEntry(props) {
@@ -27,7 +27,7 @@ function DateRangeFacetFilterListEntry(props) {
             {},
             ...Object.keys(facets)
               .filter((f) => f !== facet)
-              .map((f) => ({ [f]: facets[f] })),
+              .map((f) => ({ [f]: facets[f] }))
           );
           !isEditMode && setFacets(filteredFacets);
         }}

@@ -1,6 +1,6 @@
-import type { PloneContent } from 'plone-restapi-client/dist/content'
-import { Link } from '@remix-run/react'
-import { flattenToAppURL } from '~/utils/urls'
+import type { PloneContent } from 'plone-restapi-client/dist/content';
+import { Link } from '@remix-run/react';
+import { flattenToAppURL } from '~/utils/urls';
 
 const Navigation = ({ items }: { items: PloneContent[] }) => {
   return (
@@ -13,7 +13,7 @@ const Navigation = ({ items }: { items: PloneContent[] }) => {
         ))}
       </ul>
     </nav>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;

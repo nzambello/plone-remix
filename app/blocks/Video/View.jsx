@@ -21,10 +21,10 @@ const View = (props) => {
       className={cx(
         'block video align',
         {
-          center: !Boolean(data.align),
+          center: !Boolean(data.align)
         },
         data.align,
-        className,
+        className
       )}
     >
       <Body data={data} />
@@ -38,7 +38,7 @@ const View = (props) => {
  * @static
  */
 View.propTypes = {
-  data: PropTypes.objectOf(PropTypes.any).isRequired,
+  data: PropTypes.objectOf(PropTypes.any).isRequired
 };
 
 export default withBlockExtensions(View);

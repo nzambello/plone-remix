@@ -33,7 +33,7 @@ class CellComponent extends Component {
     onChange: PropTypes.func.isRequired,
     isTableBlockSelected: PropTypes.bool,
     disableNewBlocks: PropTypes.bool,
-    editable: PropTypes.bool,
+    editable: PropTypes.bool
   };
 
   /**
@@ -43,7 +43,7 @@ class CellComponent extends Component {
    */
   static defaultProps = {
     detached: false,
-    editable: true,
+    editable: true
   };
 
   /**
@@ -64,12 +64,12 @@ class CellComponent extends Component {
       editorState = EditorState.createWithContent(convertFromRaw(props.value));
 
       const inlineToolbarPlugin = createInlineToolbarPlugin({
-        structure: this.draftConfig.richTextEditorInlineToolbarButtons,
+        structure: this.draftConfig.richTextEditorInlineToolbarButtons
       });
 
       this.state = {
         editorState,
-        inlineToolbarPlugin,
+        inlineToolbarPlugin
       };
     }
 
@@ -141,7 +141,7 @@ class CellComponent extends Component {
           editorState={this.state.editorState}
           plugins={[
             this.state.inlineToolbarPlugin,
-            ...this.draftConfig.richTextEditorPlugins,
+            ...this.draftConfig.richTextEditorPlugins
           ]}
           blockRenderMap={this.draftConfig.extendedBlockRenderMap}
           blockStyleFn={this.draftConfig.blockStyleFn}
@@ -149,7 +149,7 @@ class CellComponent extends Component {
           handleReturn={(e) => {
             if (isSoftNewlineEvent(e)) {
               this.onChange(
-                RichUtils.insertSoftNewline(this.state.editorState),
+                RichUtils.insertSoftNewline(this.state.editorState)
               );
               return 'handled';
             }
@@ -157,16 +157,15 @@ class CellComponent extends Component {
               const selectionState = this.state.editorState.getSelection();
               const anchorKey = selectionState.getAnchorKey();
               const currentContent = this.state.editorState.getCurrentContent();
-              const currentContentBlock = currentContent.getBlockForKey(
-                anchorKey,
-              );
+              const currentContentBlock =
+                currentContent.getBlockForKey(anchorKey);
               const blockType = currentContentBlock.getType();
               if (!includes(this.draftConfig.listBlockTypes, blockType)) {
                 this.props.onSelectBlock(
                   this.props.onAddBlock(
                     this.draftConfig.defaultBlockType,
-                    this.props.index + 1,
-                  ),
+                    this.props.index + 1
+                  )
                 );
                 return 'handled';
               }
@@ -193,7 +192,7 @@ export const Cell = injectLazyLibs([
   'draftJsImportHtml',
   'draftJsInlineToolbarPlugin',
   'draftJsLibIsSoftNewlineEvent',
-  'immutableLib',
+  'immutableLib'
 ])(CellComponent);
 
 const Preloader = (props) => {

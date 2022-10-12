@@ -20,14 +20,14 @@ const Facets = (props) => {
     facets,
     setFacets,
     facetWrapper,
-    isEditMode,
+    isEditMode
   } = props;
   const { search } = config.blocks.blocksConfig;
 
   const FacetWrapper = facetWrapper;
   const query_to_values = Object.assign(
     {},
-    ...(data?.query?.query?.map(({ i, v }) => ({ [i]: v })) || []),
+    ...(data?.query?.query?.map(({ i, v }) => ({ [i]: v })) || [])
   );
 
   return (
@@ -42,18 +42,18 @@ const Facets = (props) => {
           let choices = Object.keys(values)
             .map((name) => ({
               value: name,
-              label: values[name].title,
+              label: values[name].title
             }))
             // filter the available values based on the allowed values in the
             // base query
             .filter(({ value }) =>
               query_to_values[field]
                 ? query_to_values[field].includes(value)
-                : true,
+                : true
             );
 
           choices = choices.sort((a, b) =>
-            a.label.localeCompare(b.label, 'en', { sensitivity: 'base' }),
+            a.label.localeCompare(b.label, 'en', { sensitivity: 'base' })
           );
 
           const isMulti = facetSettings.multiple;
@@ -64,14 +64,13 @@ const Facets = (props) => {
           const { view: FacetWidget, stateToValue } = resolveExtension(
             'type',
             search.extensions.facetWidgets.types,
-            facetSettings,
+            facetSettings
           );
 
           let value = stateToValue({ facetSettings, index, selectedValue });
 
-          const {
-            rewriteOptions = (name, options) => options,
-          } = search.extensions.facetWidgets;
+          const { rewriteOptions = (name, options) => options } =
+            search.extensions.facetWidgets;
 
           return FacetWrapper && (isEditMode || showFacet(index)) ? (
             <FacetWrapper key={facetSettings['@id']}>

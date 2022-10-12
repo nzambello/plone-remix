@@ -11,8 +11,8 @@ test('renders an Image Block Sidebar component', () => {
   const store = mockStore({
     intl: {
       locale: 'en',
-      messages: {},
-    },
+      messages: {}
+    }
   });
   const component = renderer.create(
     <Provider store={store}>
@@ -24,7 +24,7 @@ test('renders an Image Block Sidebar component', () => {
         openObjectBrowser={() => {}}
         resetSubmitUrl={() => {}}
       />
-    </Provider>,
+    </Provider>
   );
   const json = component.toJSON();
   expect(json).toMatchSnapshot();

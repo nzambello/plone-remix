@@ -49,7 +49,7 @@ const ImageSidebar = (props) => {
         onChangeField={(id, value) => {
           onChangeBlock(block, {
             ...data,
-            [id]: value,
+            [id]: value
           });
         }}
         formData={data}
@@ -62,7 +62,7 @@ const ImageSidebar = (props) => {
 ImageSidebar.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,
   block: PropTypes.string.isRequired,
-  onChangeBlock: PropTypes.func.isRequired,
+  onChangeBlock: PropTypes.func.isRequired
 };
 
 export default ImageSidebar;

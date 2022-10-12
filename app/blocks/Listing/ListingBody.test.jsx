@@ -19,7 +19,7 @@ test('renders a ListingBody component', () => {
               '@type': 'Document',
               description: '',
               review_state: 'private',
-              title: 'the page',
+              title: 'the page'
             },
             {
               '@id': 'http://localhost:8080/Plone/front-page',
@@ -27,21 +27,21 @@ test('renders a ListingBody component', () => {
               description:
                 'Congratulations! You have successfully installed Plone.',
               review_state: 'published',
-              title: 'Welcome to Plone',
-            },
-          ],
-        },
-      },
+              title: 'Welcome to Plone'
+            }
+          ]
+        }
+      }
     },
     content: {
       data: {
-        is_folderish: true,
-      },
+        is_folderish: true
+      }
     },
     intl: {
       locale: 'en',
-      messages: {},
-    },
+      messages: {}
+    }
   });
   const component = renderer.create(
     <Provider store={store}>
@@ -54,9 +54,9 @@ test('renders a ListingBody component', () => {
               {
                 i: 'review_state',
                 o: 'plone.app.querystring.operation.selection.any',
-                v: ['private'],
-              },
-            ],
+                v: ['private']
+              }
+            ]
           }}
           properties={{ is_folderish: true }}
           block="1234"
@@ -65,7 +65,7 @@ test('renders a ListingBody component', () => {
           variation={{}}
         />
       </MemoryRouter>
-    </Provider>,
+    </Provider>
   );
   const json = component.toJSON();
   expect(json).toMatchSnapshot();

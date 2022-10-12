@@ -4,12 +4,12 @@ import { defineMessages, useIntl } from 'react-intl';
 const messages = defineMessages({
   searchResults: {
     id: 'Search results',
-    defaultMessage: 'Search results',
+    defaultMessage: 'Search results'
   },
   searchedFor: {
     id: 'Searched for',
-    defaultMessage: 'Searched for',
-  },
+    defaultMessage: 'Searched for'
+  }
 });
 
 const SearchDetails = ({ total, text, as = 'h4' }) => {

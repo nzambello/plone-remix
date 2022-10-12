@@ -30,7 +30,7 @@ ToggleFacet.valueToQuery = ({ value, facet }) => {
     ? {
         i: facet.field.value,
         o: 'plone.app.querystring.operation.boolean.isTrue',
-        v: '',
+        v: ''
       }
     : null;
 };

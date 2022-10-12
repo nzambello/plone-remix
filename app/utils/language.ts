@@ -1,8 +1,8 @@
 const langmap = new Proxy<{
   [lngKey: string]: {
-    nativeName: string
-    englishName: string
-  }
+    nativeName: string;
+    englishName: string;
+  };
 }>(
   {
     ach: {
@@ -885,17 +885,17 @@ const langmap = new Proxy<{
   {
     get: function (obj, lang) {
       if (lang.toString().includes('-')) {
-        let [lng, country] = lang.toString().split('-')
-        let lngKey = `${lng}-${country.toUpperCase()}`
-        return obj[lngKey]
+        let [lng, country] = lang.toString().split('-');
+        let lngKey = `${lng}-${country.toUpperCase()}`;
+        return obj[lngKey];
       } else if (lang.toString().includes('_')) {
-        let [lng, country] = lang.toString().split('_')
-        let lngKey = `${lng}-${country.toUpperCase()}`
-        return obj[lngKey]
+        let [lng, country] = lang.toString().split('_');
+        let lngKey = `${lng}-${country.toUpperCase()}`;
+        return obj[lngKey];
       }
-      return obj[lang.toString()]
+      return obj[lang.toString()];
     }
   }
-)
+);
 
-export default langmap
+export default langmap;

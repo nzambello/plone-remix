@@ -8,7 +8,7 @@ import { isEmpty } from 'lodash';
 export const selectFacetStateToValue = ({
   facetSettings,
   index,
-  selectedValue,
+  selectedValue
 }) => {
   const isMulti = facetSettings.multiple;
   return selectedValue
@@ -16,12 +16,12 @@ export const selectFacetStateToValue = ({
       ? Array.isArray(selectedValue)
         ? selectedValue.map((v) => ({
             value: v,
-            label: index.values?.[v]?.title,
+            label: index.values?.[v]?.title
           }))
         : []
       : {
           value: selectedValue,
-          label: index.values?.[selectedValue]?.title,
+          label: index.values?.[selectedValue]?.title
         }
     : [];
 };
@@ -33,7 +33,7 @@ export const selectFacetSchemaEnhancer = ({ schema, formData }) => {
   fields = [
     ...fields.slice(0, pos),
     'multiple',
-    ...fields.slice(pos, fields.length),
+    ...fields.slice(pos, fields.length)
   ];
   schema.fieldsets[0].fields = fields;
   return schema;
@@ -46,7 +46,7 @@ export const selectFacetValueToQuery = ({ value, facet }) => {
         o: Array.isArray(value)
           ? 'plone.app.querystring.operation.list.contains'
           : 'plone.app.querystring.operation.selection.is',
-        v: value,
+        v: value
       }
     : undefined;
 };

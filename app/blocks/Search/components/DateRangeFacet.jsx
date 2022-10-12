@@ -16,12 +16,12 @@ import 'react-dates/lib/css/_datepicker.css';
 const messages = defineMessages({
   startDate: {
     id: 'Start Date',
-    defaultMessage: 'Start Date',
+    defaultMessage: 'Start Date'
   },
   endDate: {
     id: 'End Date',
-    defaultMessage: 'End Date',
-  },
+    defaultMessage: 'End Date'
+  }
 });
 
 const PrevIcon = () => (
@@ -32,7 +32,7 @@ const PrevIcon = () => (
       left: '22px',
       padding: '5px',
       position: 'absolute',
-      top: '15px',
+      top: '15px'
     }}
     // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
     tabIndex="0"
@@ -48,7 +48,7 @@ const NextIcon = () => (
       right: '22px',
       padding: '5px',
       position: 'absolute',
-      top: '15px',
+      top: '15px'
     }}
     // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
     tabIndex="0"
@@ -88,7 +88,7 @@ const DateRangeFacet = (props) => {
             onDatesChange={({ startDate, endDate }) => {
               onChange(facet.field.value, [
                 startDate ? startDate.format('YYYY-MM-DD') : null,
-                endDate ? endDate.format('YYYY-MM-DD') : null,
+                endDate ? endDate.format('YYYY-MM-DD') : null
               ]);
             }}
             isOutsideRange={() => false}
@@ -110,7 +110,7 @@ DateRangeFacet.valueToQuery = ({ value, facet }) => {
     ? {
         i: facet.field.value,
         o: 'plone.app.querystring.operation.date.between',
-        v: value,
+        v: value
       }
     : null;
 };
@@ -118,7 +118,7 @@ DateRangeFacet.valueToQuery = ({ value, facet }) => {
 export default compose(
   injectLazyLibs(['reactDates', 'moment']),
   connect((state) => ({
-    lang: state.intl.locale,
+    lang: state.intl.locale
   })),
-  injectIntl,
+  injectIntl
 )(DateRangeFacet);

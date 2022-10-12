@@ -1,4 +1,4 @@
-import type { BlockData } from 'types/blocks'
+import type { BlockData } from 'types/blocks';
 
 /**
  * View html block class.
@@ -6,9 +6,12 @@ import type { BlockData } from 'types/blocks'
  * @extends Component
  */
 const HTMLBlockView = ({ content }: BlockData) => (
-  <div className="block html" dangerouslySetInnerHTML={{ __html: content.html }} />
-)
+  <div
+    className="block html"
+    dangerouslySetInnerHTML={{ __html: content.html }}
+  />
+);
 
-HTMLBlockView.displayName = 'HTMLBlock'
+HTMLBlockView.displayName = 'HTMLBlock';
 
-export default HTMLBlockView
+export default HTMLBlockView;

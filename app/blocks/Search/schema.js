@@ -6,96 +6,94 @@ import { hasNonValueOperation, hasDateOperation } from './utils';
 const messages = defineMessages({
   searchBlock: {
     id: 'Search block',
-    defaultMessage: 'Search block',
+    defaultMessage: 'Search block'
   },
   controls: {
     id: 'Controls',
-    defaultMessage: 'Controls',
+    defaultMessage: 'Controls'
   },
   baseSearchQuery: {
     id: 'Base search query',
-    defaultMessage: 'Base search query',
+    defaultMessage: 'Base search query'
   },
   sectionTitle: {
     id: 'Section title',
-    defaultMessage: 'Section title',
+    defaultMessage: 'Section title'
   },
   headline: {
     id: 'Headline',
-    defaultMessage: 'Headline',
+    defaultMessage: 'Headline'
   },
   searchInputPrompt: {
     id: 'Search input label',
-    defaultMessage: 'Search input label',
+    defaultMessage: 'Search input label'
   },
   showSearchInput: {
     id: 'Show search input?',
-    defaultMessage: 'Show search input?',
+    defaultMessage: 'Show search input?'
   },
   showSearchButtonTitle: {
     id: 'Show search button?',
-    defaultMessage: 'Show search button?',
+    defaultMessage: 'Show search button?'
   },
   showSearchButtonDescription: {
-    id:
-      'The button presence disables the live search, the query is issued when you press ENTER',
+    id: 'The button presence disables the live search, the query is issued when you press ENTER',
     defaultMessage:
-      'The button presence disables the live search, the query is issued when you press ENTER',
+      'The button presence disables the live search, the query is issued when you press ENTER'
   },
   searchButtonLabel: {
     id: 'Search button label',
-    defaultMessage: 'Search button label',
+    defaultMessage: 'Search button label'
   },
   searchButtonPlaceholder: {
     id: 'Search',
-    defaultMessage: 'Search',
+    defaultMessage: 'Search'
   },
   showSortOn: {
     id: 'Show sorting?',
-    defaultMessage: 'Show sorting?',
+    defaultMessage: 'Show sorting?'
   },
   sortOnLabel: {
     id: 'Sort on label',
-    defaultMessage: 'Sort on label',
+    defaultMessage: 'Sort on label'
   },
   sortOnOptions: {
     id: 'Sort on options',
-    defaultMessage: 'Sort on options',
+    defaultMessage: 'Sort on options'
   },
   facets: {
     id: 'Facets',
-    defaultMessage: 'Facets',
+    defaultMessage: 'Facets'
   },
   facet: {
     id: 'Facet',
-    defaultMessage: 'Facet',
+    defaultMessage: 'Facet'
   },
   label: {
     id: 'Label',
-    defaultMessage: 'Label',
+    defaultMessage: 'Label'
   },
   field: {
     id: 'Field',
-    defaultMessage: 'Field',
+    defaultMessage: 'Field'
   },
   multipleChoices: {
     id: 'Multiple choices?',
-    defaultMessage: 'Multiple choices?',
+    defaultMessage: 'Multiple choices?'
   },
   hideFacetTitle: {
     id: 'Hide facet?',
-    defaultMessage: 'Hide facet?',
+    defaultMessage: 'Hide facet?'
   },
   hideFacetDescription: {
-    id:
-      'Hidden facets will still filter the results if proper parameters are passed in URLs',
+    id: 'Hidden facets will still filter the results if proper parameters are passed in URLs',
     defaultMessage:
-      'Hidden facets will still filter the results if proper parameters are passed in URLs',
+      'Hidden facets will still filter the results if proper parameters are passed in URLs'
   },
   facetWidget: {
     id: 'Facet widget',
-    defaultMessage: 'Facet widget',
-  },
+    defaultMessage: 'Facet widget'
+  }
 });
 
 const enhanceSchema = (originalSchema, formData) => {
@@ -123,12 +121,12 @@ const FacetSchema = ({ intl }) => ({
     {
       id: 'default',
       title: 'Default',
-      fields: ['title', 'field', 'type', 'hidden'],
-    },
+      fields: ['title', 'field', 'type', 'hidden']
+    }
   ],
   properties: {
     title: {
-      title: intl.formatMessage(messages.label),
+      title: intl.formatMessage(messages.label)
     },
     field: {
       title: intl.formatMessage(messages.field),
@@ -146,33 +144,35 @@ const FacetSchema = ({ intl }) => ({
             hasNonValueOperation(options[k].operations) ||
             hasDateOperation(options[k].operations)
               ? { [k]: options[k] }
-              : {},
-          ),
+              : {}
+          )
         );
-      },
+      }
     },
     multiple: {
       type: 'boolean',
       title: intl.formatMessage(messages.multipleChoices),
-      default: false,
+      default: false
     },
     hidden: {
       type: 'boolean',
       title: intl.formatMessage(messages.hideFacetTitle),
       default: false,
-      description: intl.formatMessage(messages.hideFacetDescription),
+      description: intl.formatMessage(messages.hideFacetDescription)
     },
     type: {
       title: intl.formatMessage(messages.facetWidget),
-      choices: config.blocks.blocksConfig.search.extensions.facetWidgets.types.map(
-        ({ id, title }) => [id, title],
-      ),
-      defaultValue: config.blocks.blocksConfig.search.extensions.facetWidgets.types.find(
-        ({ isDefault }) => isDefault,
-      ).id,
-    },
+      choices:
+        config.blocks.blocksConfig.search.extensions.facetWidgets.types.map(
+          ({ id, title }) => [id, title]
+        ),
+      defaultValue:
+        config.blocks.blocksConfig.search.extensions.facetWidgets.types.find(
+          ({ isDefault }) => isDefault
+        ).id
+    }
   },
-  required: ['field'],
+  required: ['field']
 });
 
 export default ({ data = {}, intl }) => {
@@ -182,17 +182,17 @@ export default ({ data = {}, intl }) => {
       {
         id: 'default',
         title: 'Default',
-        fields: ['headline'],
+        fields: ['headline']
       },
       {
         id: 'searchquery',
         title: intl.formatMessage(messages.baseSearchQuery),
-        fields: ['query'],
+        fields: ['query']
       },
       {
         id: 'facets',
         title: intl.formatMessage(messages.facets),
-        fields: ['facetsTitle', 'facets'],
+        fields: ['facetsTitle', 'facets']
       },
       {
         id: 'controls',
@@ -202,57 +202,57 @@ export default ({ data = {}, intl }) => {
           ...(data.showSortOn ? ['sortOnLabel'] : []),
           ...(data.showSortOn ? ['sortOnOptions'] : []),
           'showSearchInput',
-          ...(data.showSearchInput ?? true ? ['showSearchButton'] : []),
+          ...(data.showSearchInput ?? true ? ['showSearchButton'] : [])
           // ...(data.showSearchInput ? ['searchInputPrompt'] : []),
           // ...(data.showSearchButton ? ['searchButtonLabel'] : []),
-        ],
-      },
+        ]
+      }
     ],
     properties: {
       headline: {
-        title: intl.formatMessage(messages.headline),
+        title: intl.formatMessage(messages.headline)
       },
       searchInputPrompt: {
-        title: intl.formatMessage(messages.searchInputPrompt),
+        title: intl.formatMessage(messages.searchInputPrompt)
       },
       showSearchInput: {
         type: 'boolean',
         title: intl.formatMessage(messages.showSearchInput),
-        default: true,
+        default: true
       },
       showSearchButton: {
         type: 'boolean',
         title: intl.formatMessage(messages.showSearchButtonTitle),
-        description: intl.formatMessage(messages.showSearchButtonDescription),
+        description: intl.formatMessage(messages.showSearchButtonDescription)
       },
       searchButtonLabel: {
         title: intl.formatMessage(messages.searchButtonLabel),
-        placeholder: intl.formatMessage(messages.searchButtonPlaceholder),
+        placeholder: intl.formatMessage(messages.searchButtonPlaceholder)
       },
       showSortOn: {
         type: 'boolean',
-        title: intl.formatMessage(messages.showSortOn),
+        title: intl.formatMessage(messages.showSortOn)
       },
       sortOnLabel: {
-        title: intl.formatMessage(messages.sortOnLabel),
+        title: intl.formatMessage(messages.sortOnLabel)
       },
       sortOnOptions: {
         title: intl.formatMessage(messages.sortOnOptions),
-        widget: 'array',
+        widget: 'array'
       },
       facets: {
         title: intl.formatMessage(messages.facets),
         widget: 'object_list',
         schema: FacetSchema({ intl }),
-        schemaExtender: enhanceSchema,
+        schemaExtender: enhanceSchema
       },
       facetsTitle: {
-        title: intl.formatMessage(messages.sectionTitle),
+        title: intl.formatMessage(messages.sectionTitle)
       },
       query: {
-        title: 'Query',
-      },
+        title: 'Query'
+      }
     },
-    required: [],
+    required: []
   };
 };

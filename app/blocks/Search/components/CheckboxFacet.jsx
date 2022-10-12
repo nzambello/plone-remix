@@ -3,7 +3,7 @@ import { Checkbox, Header } from 'semantic-ui-react';
 import {
   selectFacetSchemaEnhancer,
   selectFacetStateToValue,
-  selectFacetValueToQuery,
+  selectFacetValueToQuery
 } from './base';
 
 /**
@@ -37,11 +37,11 @@ const CheckboxFacet = (props) => {
                         ...facetValue
                           .filter((f) => f.value !== value)
                           .map((f) => f.value),
-                        ...(checked ? [value] : []),
+                        ...(checked ? [value] : [])
                       ]
                     : checked
                     ? value
-                    : null,
+                    : null
                 )
               }
             />

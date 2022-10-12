@@ -1,8 +1,8 @@
-import type { BlockData } from 'types/blocks'
-import type { SlateNode } from '../helpers'
-import { useState, useMemo } from 'react'
-import { renderSlate } from '../helpers'
-import cx from 'classnames'
+import type { BlockData } from 'types/blocks';
+import type { SlateNode } from '../helpers';
+import { useState, useMemo } from 'react';
+import { renderSlate } from '../helpers';
+import cx from 'classnames';
 
 /**
  * Slate Table block's View class.
@@ -15,22 +15,22 @@ const TableBlockView = ({
 }: BlockData<{
   table?: {
     rows: {
-      key: string
+      key: string;
       cells: {
-        key: string
-        type: 'header' | 'data'
-        value: SlateNode[]
-      }[]
-    }[]
-    fixed?: boolean
-    compact?: boolean
-    striped?: boolean
-    basic?: boolean
-    celled?: boolean
-    inverted?: boolean
-    sortable?: boolean
-    hideHeaders?: boolean
-  }
+        key: string;
+        type: 'header' | 'data';
+        value: SlateNode[];
+      }[];
+    }[];
+    fixed?: boolean;
+    compact?: boolean;
+    striped?: boolean;
+    basic?: boolean;
+    celled?: boolean;
+    inverted?: boolean;
+    sortable?: boolean;
+    hideHeaders?: boolean;
+  };
 }>) => {
   // const headers = useMemo(() => {
   //   return content?.table?.rows?.[0]?.cells
@@ -55,12 +55,16 @@ const TableBlockView = ({
   // }, [content?.table?.rows])
 
   const headers = useMemo(() => {
-    return content?.table?.rows.filter((row) => row.cells.every((cell) => cell.type === 'header'))
-  }, [content?.table?.rows])
+    return content?.table?.rows.filter((row) =>
+      row.cells.every((cell) => cell.type === 'header')
+    );
+  }, [content?.table?.rows]);
 
   const rows = useMemo(() => {
-    return content?.table?.rows.filter((row) => row.cells.every((cell) => cell.type !== 'header'))
-  }, [content?.table?.rows])
+    return content?.table?.rows.filter((row) =>
+      row.cells.every((cell) => cell.type !== 'header')
+    );
+  }, [content?.table?.rows]);
 
   return (
     <>
@@ -106,9 +110,9 @@ const TableBlockView = ({
         </table>
       )}
     </>
-  )
-}
+  );
+};
 
-TableBlockView.displayName = 'TableBlock'
+TableBlockView.displayName = 'TableBlock';
 
-export default TableBlockView
+export default TableBlockView;

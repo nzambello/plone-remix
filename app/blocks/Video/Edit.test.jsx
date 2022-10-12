@@ -18,9 +18,9 @@ config.blocks.blocksConfig = {
     sidebarTab: 1,
     security: {
       addPermission: [],
-      view: [],
-    },
-  },
+      view: []
+    }
+  }
 };
 
 const mockStore = configureStore();
@@ -29,8 +29,8 @@ test('renders an edit video block component', () => {
   const store = mockStore({
     intl: {
       locale: 'en',
-      messages: {},
-    },
+      messages: {}
+    }
   });
 
   const component = renderer.create(
@@ -47,7 +47,7 @@ test('renders an edit video block component', () => {
         handleKeyDown={() => {}}
         index={1}
       />
-    </Provider>,
+    </Provider>
   );
   const json = component.toJSON();
   expect(json).toMatchSnapshot();

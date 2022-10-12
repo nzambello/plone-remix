@@ -4,7 +4,7 @@ import {
   SearchDetails,
   Facets,
   FilterList,
-  SortOn,
+  SortOn
 } from '../components';
 import { Grid, Segment } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
@@ -14,8 +14,8 @@ import { defineMessages, useIntl } from 'react-intl';
 const messages = defineMessages({
   searchButtonText: {
     id: 'Search',
-    defaultMessage: 'Search',
-  },
+    defaultMessage: 'Search'
+  }
 });
 
 const FacetWrapper = ({ children }) => (
@@ -39,7 +39,7 @@ const RightColumnFacets = (props) => {
     searchedText, // search text for previous search
     searchText, // search text currently being entered (controlled input)
     isEditMode,
-    querystring = {},
+    querystring = {}
     // searchData,
     // mode = 'view',
     // variation,
@@ -111,7 +111,7 @@ const RightColumnFacets = (props) => {
                       searchedText || '',
                       facets,
                       sortOn,
-                      sortOrder,
+                      sortOrder
                     );
                   });
                 }}

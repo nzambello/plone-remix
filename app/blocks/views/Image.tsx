@@ -1,8 +1,8 @@
-import type { BlockData } from 'types/blocks'
-import type { PloneContent } from 'plone-restapi-client/dist/content'
-import cx from 'classnames'
-import { isInternalURL, flattenToAppURL } from '../../utils/urls'
-import config from '~/config'
+import type { BlockData } from 'types/blocks';
+import type { PloneContent } from 'plone-restapi-client/dist/content';
+import cx from 'classnames';
+import { isInternalURL, flattenToAppURL } from '../../utils/urls';
+import config from '~/config';
 
 /**
  * View image block class.
@@ -14,14 +14,14 @@ export const ImageBlockView = ({
   data,
   detached
 }: BlockData<{
-  align?: string
-  alt?: string
-  size?: string
-  url?: string
-  href?: PloneContent[]
-  target?: string
+  align?: string;
+  alt?: string;
+  size?: string;
+  url?: string;
+  href?: PloneContent[];
+  target?: string;
 }>) => {
-  const href = data?.href?.[0]?.['@id']
+  const href = data?.href?.[0]?.['@id'];
   return (
     <p
       className={cx('block image align', {
@@ -45,19 +45,27 @@ export const ImageBlockView = ({
                     ? // Backwards compat in the case that the block is storing the full server URL
                       (() => {
                         if (content.size === 'l')
-                          return `${config.settings.apiPath}${flattenToAppURL(content.url)}/@@images/image`
+                          return `${config.settings.apiPath}${flattenToAppURL(
+                            content.url
+                          )}/@@images/image`;
                         if (content.size === 'm')
-                          return `${config.settings.apiPath}${flattenToAppURL(content.url)}/@@images/image/preview`
+                          return `${config.settings.apiPath}${flattenToAppURL(
+                            content.url
+                          )}/@@images/image/preview`;
                         if (content.size === 's')
-                          return `${config.settings.apiPath}${flattenToAppURL(content.url)}/@@images/image/mini`
-                        return `${config.settings.apiPath}${flattenToAppURL(content.url)}/@@images/image`
+                          return `${config.settings.apiPath}${flattenToAppURL(
+                            content.url
+                          )}/@@images/image/mini`;
+                        return `${config.settings.apiPath}${flattenToAppURL(
+                          content.url
+                        )}/@@images/image`;
                       })()
                     : content.url
                 }
                 alt={content.alt || ''}
                 loading="lazy"
               />
-            )
+            );
             if (href) {
               return (
                 <a
@@ -67,17 +75,17 @@ export const ImageBlockView = ({
                 >
                   {image}
                 </a>
-              )
+              );
             } else {
-              return image
+              return image;
             }
           })()}
         </>
       )}
     </p>
-  )
-}
+  );
+};
 
-ImageBlockView.displayName = 'ImageBlock'
+ImageBlockView.displayName = 'ImageBlock';
 
-export default ImageBlockView
+export default ImageBlockView;

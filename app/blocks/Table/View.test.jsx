@@ -23,18 +23,18 @@ test('renders a view table component', () => {
                         inlineStyleRanges: [],
                         key: 'fgm98',
                         text: 'My header',
-                        type: 'header-two',
-                      },
+                        type: 'header-two'
+                      }
                     ],
-                    entityMap: {},
-                  },
-                },
-              ],
-            },
-          ],
-        },
+                    entityMap: {}
+                  }
+                }
+              ]
+            }
+          ]
+        }
       }}
-    />,
+    />
   );
   const json = component.toJSON();
   expect(json).toMatchSnapshot();

@@ -3,40 +3,40 @@ import { defineMessages } from 'react-intl';
 const messages = defineMessages({
   Source: {
     id: 'Source',
-    defaultMessage: 'Source',
+    defaultMessage: 'Source'
   },
   Image: {
     id: 'Image',
-    defaultMessage: 'Image',
+    defaultMessage: 'Image'
   },
   AltText: {
     id: 'Alt text',
-    defaultMessage: 'Alt text',
+    defaultMessage: 'Alt text'
   },
   Align: {
     id: 'Alignment',
-    defaultMessage: 'Alignment',
+    defaultMessage: 'Alignment'
   },
   size: {
     id: 'Image size',
-    defaultMessage: 'Image size',
+    defaultMessage: 'Image size'
   },
   LinkTo: {
     id: 'Link to',
-    defaultMessage: 'Link to',
+    defaultMessage: 'Link to'
   },
   openLinkInNewTab: {
     id: 'Open in a new tab',
-    defaultMessage: 'Open in a new tab',
+    defaultMessage: 'Open in a new tab'
   },
   AltTextHint: {
     id: 'Alt text hint',
-    defaultMessage: 'Leave empty if the image is purely decorative.',
+    defaultMessage: 'Leave empty if the image is purely decorative.'
   },
   AltTextHintLinkText: {
     id: 'Alt text hint link text',
-    defaultMessage: 'Describe the purpose of the image.',
-  },
+    defaultMessage: 'Describe the purpose of the image.'
+  }
 });
 
 export function ImageSchema({ formData, intl }) {
@@ -45,22 +45,22 @@ export function ImageSchema({ formData, intl }) {
       {
         id: 'default',
         title: 'Default',
-        fields: [...(formData.url ? ['url', 'alt', 'align', 'size'] : [])],
+        fields: [...(formData.url ? ['url', 'alt', 'align', 'size'] : [])]
       },
       ...(formData.url
         ? [
             {
               id: 'link_settings',
               title: 'Link settings',
-              fields: ['href', 'openLinkInNewTab'],
-            },
+              fields: ['href', 'openLinkInNewTab']
+            }
           ]
-        : []),
+        : [])
     ],
     properties: {
       url: {
         title: intl.formatMessage(messages.Source),
-        widget: 'url',
+        widget: 'url'
       },
       alt: {
         title: intl.formatMessage(messages.AltText),
@@ -76,28 +76,28 @@ export function ImageSchema({ formData, intl }) {
             </a>{' '}
             {intl.formatMessage(messages.AltTextHint)}
           </>
-        ),
+        )
       },
       align: {
         title: intl.formatMessage(messages.Align),
-        widget: 'align',
+        widget: 'align'
       },
       size: {
         title: intl.formatMessage(messages.size),
-        widget: 'image_size',
+        widget: 'image_size'
       },
       href: {
         title: intl.formatMessage(messages.LinkTo),
         widget: 'object_browser',
         mode: 'link',
         selectedItemAttrs: ['Title', 'Description', 'hasPreviewImage'],
-        allowExternals: true,
+        allowExternals: true
       },
       openLinkInNewTab: {
         title: intl.formatMessage(messages.openLinkInNewTab),
-        type: 'boolean',
-      },
+        type: 'boolean'
+      }
     },
-    required: [],
+    required: []
   };
 }

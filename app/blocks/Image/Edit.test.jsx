@@ -23,9 +23,9 @@ config.blocks.blocksConfig = {
     sidebarTab: 1,
     security: {
       addPermission: [],
-      view: [],
-    },
-  },
+      view: []
+    }
+  }
 };
 
 test('renders an edit image block component', async () => {
@@ -34,13 +34,13 @@ test('renders an edit image block component', async () => {
       create: {},
       data: {},
       subrequests: {
-        [blockId]: {},
-      },
+        [blockId]: {}
+      }
     },
     intl: {
       locale: 'en',
-      messages: {},
-    },
+      messages: {}
+    }
   });
   const component = renderer.create(
     <Provider store={store}>
@@ -51,7 +51,7 @@ test('renders an edit image block component', async () => {
         content={{}}
         request={{
           loading: false,
-          loaded: false,
+          loaded: false
         }}
         pathname="/news"
         onChangeBlock={() => {}}
@@ -64,7 +64,7 @@ test('renders an edit image block component', async () => {
         index={1}
         openObjectBrowser={() => {}}
       />
-    </Provider>,
+    </Provider>
   );
   const json = component.toJSON();
   await waitFor(() => {});

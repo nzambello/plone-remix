@@ -12,7 +12,7 @@ function SelectFacetFilterListEntry(props) {
           !isEditMode &&
             setFacets({
               ...facets,
-              [facet]: '',
+              [facet]: ''
             });
         }}
       />
@@ -29,7 +29,7 @@ function SelectFacetFilterListEntry(props) {
               !isEditMode &&
                 setFacets({
                   ...facets,
-                  [facet]: entries,
+                  [facet]: entries
                 });
             }}
           />

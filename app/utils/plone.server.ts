@@ -1,6 +1,6 @@
-import ploneClient from 'plone-restapi-client'
-import { PLONE_RESTAPI_URL } from './variables.server'
+import ploneClient from 'plone-restapi-client';
+import { PLONE_RESTAPI_URL } from './variables.server';
 
-ploneClient.client.init(PLONE_RESTAPI_URL)
+ploneClient.client.init(PLONE_RESTAPI_URL);
 
-export default ploneClient
+export default ploneClient;

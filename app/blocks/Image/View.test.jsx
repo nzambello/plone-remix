@@ -11,8 +11,8 @@ const mockStore = configureStore();
 const store = mockStore({
   intl: {
     locale: 'en',
-    messages: {},
-  },
+    messages: {}
+  }
 });
 
 describe('Image View Component', () => {
@@ -30,7 +30,7 @@ describe('Image View Component', () => {
             data={{ url: '/image.jpg', href: [{ '@id': '/front-page' }] }}
           />
         </MemoryRouter>
-      </Provider>,
+      </Provider>
     );
     const img = getByRole('img');
     const a = container.querySelector('a');
@@ -41,7 +41,7 @@ describe('Image View Component', () => {
     const { getByRole } = render(
       <Provider store={store}>
         <View data={{ url: 'https://plone.org/logo.jpg' }} />
-      </Provider>,
+      </Provider>
     );
     const img = getByRole('img');
     expect(img).toHaveAttribute('src', 'https://plone.org/logo.jpg');
@@ -52,10 +52,10 @@ describe('Image View Component', () => {
         <View
           data={{
             url: 'https://plone.org/logo.jpg',
-            href: [{ '@id': 'http://front-page' }],
+            href: [{ '@id': 'http://front-page' }]
           }}
         />
-      </Provider>,
+      </Provider>
     );
     const img = getByRole('img');
     const a = container.querySelector('a');

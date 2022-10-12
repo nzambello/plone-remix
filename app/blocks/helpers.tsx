@@ -3,9 +3,9 @@
  * @module helpers/Blocks
  */
 
-import type { SlateElementData } from 'types/blocks'
-import { Fragment } from 'react'
-import config from '../config'
+import type { SlateElementData } from 'types/blocks';
+import { Fragment } from 'react';
+import config from '../config';
 
 /**
  * Get blocks field.
@@ -13,8 +13,14 @@ import config from '../config'
  * @param {Object} props Properties.
  * @return {string} Field name of the blocks
  */
-export function getBlocksFieldname(props: { [key: string]: any }): string | null {
-  return Object.keys(props).find((key) => key !== 'volto.blocks' && key.endsWith('blocks')) || null
+export function getBlocksFieldname(props: {
+  [key: string]: any;
+}): string | null {
+  return (
+    Object.keys(props).find(
+      (key) => key !== 'volto.blocks' && key.endsWith('blocks')
+    ) || null
+  );
 }
 
 /**
@@ -23,8 +29,14 @@ export function getBlocksFieldname(props: { [key: string]: any }): string | null
  * @param {Object} props Properties.
  * @return {string} Field name of the blocks layout
  */
-export function getBlocksLayoutFieldname(props: { [key: string]: any }): string | null {
-  return Object.keys(props).find((key) => key !== 'volto.blocks' && key.endsWith('blocks_layout')) || null
+export function getBlocksLayoutFieldname(props: {
+  [key: string]: any;
+}): string | null {
+  return (
+    Object.keys(props).find(
+      (key) => key !== 'volto.blocks' && key.endsWith('blocks_layout')
+    ) || null
+  );
 }
 
 /**
@@ -38,7 +50,9 @@ export function hasBlocksData(props: { [key: string]: any }): boolean {
   const blocksFieldName = getBlocksFieldname(props);
 
   if (blocksFieldName) {
-    return props[blocksFieldName] && !!Object.keys(props[blocksFieldName]).length
+    return (
+      props[blocksFieldName] && !!Object.keys(props[blocksFieldName]).length
+    );
   }
 
   return false;
@@ -50,14 +64,19 @@ export function hasBlocksData(props: { [key: string]: any }): boolean {
  * @param {Object} properties
  * @return {Array} a list of block [id, value] pairs, in order from layout
  */
-export const getBlocks = (properties: { [x: string]: any }): [string, any][] => {
-  const blocksFieldName = getBlocksFieldname(properties)
-  const blocksLayoutFieldname = getBlocksLayoutFieldname(properties)
-  if (!blocksFieldName || !blocksLayoutFieldname) return []
+export const getBlocks = (properties: {
+  [x: string]: any;
+}): [string, any][] => {
+  const blocksFieldName = getBlocksFieldname(properties);
+  const blocksLayoutFieldname = getBlocksLayoutFieldname(properties);
+  if (!blocksFieldName || !blocksLayoutFieldname) return [];
   return (
-    properties[blocksLayoutFieldname]?.items?.map((n: string | number) => [n, properties[blocksFieldName][n]]) || []
-  )
-}
+    properties[blocksLayoutFieldname]?.items?.map((n: string | number) => [
+      n,
+      properties[blocksFieldName][n]
+    ]) || []
+  );
+};
 
 /**
  * Get the next block UID within form
@@ -66,18 +85,22 @@ export const getBlocks = (properties: { [x: string]: any }): [string, any][] => 
  * @param {string} currentBlock Block uid
  * @return {string} Next block uid
  */
-export function nextBlockId(formData: { [x: string]: any }, currentBlock: string): string | null {
-  const blocksLayoutFieldname = getBlocksLayoutFieldname(formData)
-  if (!blocksLayoutFieldname) return null
+export function nextBlockId(
+  formData: { [x: string]: any },
+  currentBlock: string
+): string | null {
+  const blocksLayoutFieldname = getBlocksLayoutFieldname(formData);
+  if (!blocksLayoutFieldname) return null;
 
-  const currentIndex = formData[blocksLayoutFieldname].items.indexOf(currentBlock)
+  const currentIndex =
+    formData[blocksLayoutFieldname].items.indexOf(currentBlock);
   if (currentIndex === formData[blocksLayoutFieldname].items.length - 1) {
     // We are already at the bottom block don't do anything
-    return null
+    return null;
   }
 
-  const newIndex = currentIndex + 1
-  return formData[blocksLayoutFieldname].items[newIndex]
+  const newIndex = currentIndex + 1;
+  return formData[blocksLayoutFieldname].items[newIndex];
 }
 
 /**
@@ -87,17 +110,21 @@ export function nextBlockId(formData: { [x: string]: any }, currentBlock: string
  * @param {string} currentBlock Block uid
  * @return {string} Previous block uid
  */
-export function previousBlockId(formData: { [x: string]: any }, currentBlock: any): string | null {
-  const blocksLayoutFieldname = getBlocksLayoutFieldname(formData)
-  if (!blocksLayoutFieldname) return null
+export function previousBlockId(
+  formData: { [x: string]: any },
+  currentBlock: any
+): string | null {
+  const blocksLayoutFieldname = getBlocksLayoutFieldname(formData);
+  if (!blocksLayoutFieldname) return null;
 
-  const currentIndex = formData[blocksLayoutFieldname].items.indexOf(currentBlock)
+  const currentIndex =
+    formData[blocksLayoutFieldname].items.indexOf(currentBlock);
   if (currentIndex === 0) {
     // We are already at the top block don't do anything
-    return null
+    return null;
   }
-  const newindex = currentIndex - 1
-  return formData[blocksLayoutFieldname].items[newindex]
+  const newindex = currentIndex - 1;
+  return formData[blocksLayoutFieldname].items[newindex];
 }
 
 /**
@@ -107,25 +134,26 @@ export function previousBlockId(formData: { [x: string]: any }, currentBlock: an
  * @param {Function} callback A function to call on each discovered block
  */
 export function visitBlocks(content: any, callback: (arg0: any[]) => void) {
-  const queue = getBlocks(content)
+  const queue = getBlocks(content);
   while (queue.length > 0) {
-    const queueItem = queue.shift()
-    const [id, blockdata] = queueItem ?? []
-    callback([id, blockdata])
+    const queueItem = queue.shift();
+    const [id, blockdata] = queueItem ?? [];
+    callback([id, blockdata]);
 
     // assumes that a block value is like: {blocks, blocks_layout} or
     // { data: {blocks, blocks_layout}}
     if (Object.keys(blockdata || {}).indexOf('blocks') > -1) {
-      queue.push(...getBlocks(blockdata))
+      queue.push(...getBlocks(blockdata));
     }
     if (Object.keys(blockdata?.data || {}).indexOf('blocks') > -1) {
-      queue.push(...getBlocks(blockdata.data))
+      queue.push(...getBlocks(blockdata.data));
     }
   }
 }
 
-export const toPairs = (obj: { [x: string]: any }) => Object.keys(obj).map((key) => [key, obj[key]])
-const isObject = (obj: { [x: string]: any }) => obj && typeof obj === 'object'
+export const toPairs = (obj: { [x: string]: any }) =>
+  Object.keys(obj).map((key) => [key, obj[key]]);
+const isObject = (obj: { [x: string]: any }) => obj && typeof obj === 'object';
 
 export const buildStyleClassNamesFromData = (styles: CSSStyleDeclaration) => {
   // styles has the form
@@ -134,33 +162,45 @@ export const buildStyleClassNamesFromData = (styles: CSSStyleDeclaration) => {
   // backgroundColor: '#AABBCC',
   // }
   // Returns: ['has--color--red', 'has--backgroundColor--AABBCC']
-  let styleArray: string[][] = []
-  const pairedStyles = toPairs(styles)
+  let styleArray: string[][] = [];
+  const pairedStyles = toPairs(styles);
   pairedStyles.forEach((item) => {
     if (isObject(item[1])) {
-      const flattenedNestedStyles = toPairs(item[1]).map((nested) => [item[0], ...nested])
-      flattenedNestedStyles.forEach((sub) => styleArray.push(sub))
+      const flattenedNestedStyles = toPairs(item[1]).map((nested) => [
+        item[0],
+        ...nested
+      ]);
+      flattenedNestedStyles.forEach((sub) => styleArray.push(sub));
     } else {
-      styleArray.push(item)
+      styleArray.push(item);
     }
-  })
+  });
   return styleArray.map((item) => {
     const classname = item.map((item) => {
-      const str_item = item ? item.toString() : ''
-      return str_item && str_item.startsWith('#') ? str_item.replace('#', '') : str_item
-    })
-    return `has--${classname[0]}--${classname[1]}${classname[2] ? `--${classname[2]}` : ''}`
-  })
-}
+      const str_item = item ? item.toString() : '';
+      return str_item && str_item.startsWith('#')
+        ? str_item.replace('#', '')
+        : str_item;
+    });
+    return `has--${classname[0]}--${classname[1]}${
+      classname[2] ? `--${classname[2]}` : ''
+    }`;
+  });
+};
 
 export type SlateNode = {
-  type?: string
-  children?: SlateNode[]
-  text?: string
-  data?: SlateElementData
-}
+  type?: string;
+  children?: SlateNode[];
+  text?: string;
+  data?: SlateElementData;
+};
 
-export const renderSlate = (id: string, nodes?: SlateNode[], override_toc?: boolean, metadata?: any) => {
+export const renderSlate = (
+  id: string,
+  nodes?: SlateNode[],
+  override_toc?: boolean,
+  metadata?: any
+) => {
   const renderedNodes = (nodes ?? []).map((node: SlateNode, i) => {
     if (node.text) {
       return (
@@ -172,26 +212,28 @@ export const renderSlate = (id: string, nodes?: SlateNode[], override_toc?: bool
                 <br />
               </span>
             ) : (
-                <span key={t + x}>{t}</span>
-              )
+              <span key={t + x}>{t}</span>
+            )
           )}
         </Fragment>
-      )
+      );
     }
 
     if (!node.type) {
-      return <Fragment key={id + i}></Fragment>
+      return <Fragment key={id + i}></Fragment>;
     }
 
-    const elements = config.settings.slate.elements
-    const shouldHaveID = config.settings.slate.topLevelTargetElements.includes(node.type!) || override_toc
+    const elements = config.settings.slate.elements;
+    const shouldHaveID =
+      config.settings.slate.topLevelTargetElements.includes(node.type!) ||
+      override_toc;
 
     if (!elements[node.type]) {
-      console.warn(`Unknown slate element type ${node.type}`)
-      console.log(node)
+      console.warn(`Unknown slate element type ${node.type}`);
+      console.log(node);
     }
 
-    const Element = elements[node.type] || elements['default']
+    const Element = elements[node.type] || elements['default'];
 
     return (
       <Element
@@ -203,8 +245,8 @@ export const renderSlate = (id: string, nodes?: SlateNode[], override_toc?: bool
       >
         {renderSlate(id, node.children, undefined, metadata)}
       </Element>
-    )
-  })
+    );
+  });
 
-  return renderedNodes.flat()
-}
+  return renderedNodes.flat();
+};

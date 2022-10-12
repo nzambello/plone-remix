@@ -15,7 +15,7 @@ const SEARCH_ENDPOINT_FIELDS = [
   'b_size',
   'limit',
   'sort_on',
-  'sort_order',
+  'sort_order'
 ];
 
 const PAQO = 'plone.app.querystring.operation';
@@ -27,9 +27,8 @@ const PAQO = 'plone.app.querystring.operation';
  *
  */
 function getInitialState(data, facets, urlSearchText, id) {
-  const {
-    types: facetWidgetTypes,
-  } = config.blocks.blocksConfig.search.extensions.facetWidgets;
+  const { types: facetWidgetTypes } =
+    config.blocks.blocksConfig.search.extensions.facetWidgets;
   const facetSettings = data?.facets || [];
 
   return {
@@ -42,7 +41,7 @@ function getInitialState(data, facets, urlSearchText, id) {
           const { valueToQuery } = resolveExtension(
             'type',
             facetWidgetTypes,
-            facet,
+            facet
           );
 
           const name = facet.field.value;
@@ -56,16 +55,16 @@ function getInitialState(data, facets, urlSearchText, id) {
             {
               i: 'SearchableText',
               o: 'plone.app.querystring.operation.string.contains',
-              v: urlSearchText,
-            },
+              v: urlSearchText
+            }
           ]
-        : []),
+        : [])
     ],
     sort_on: data.query?.sort_on,
     sort_order: data.query?.sort_order,
     b_size: data.query?.b_size,
     limit: data.query?.limit,
-    block: id,
+    block: id
   };
 }
 
@@ -83,11 +82,10 @@ function normalizeState({
   searchText, // SearchableText
   sortOn,
   sortOrder,
-  facetSettings, // data.facets extracted from block data
+  facetSettings // data.facets extracted from block data
 }) {
-  const {
-    types: facetWidgetTypes,
-  } = config.blocks.blocksConfig.search.extensions.facetWidgets;
+  const { types: facetWidgetTypes } =
+    config.blocks.blocksConfig.search.extensions.facetWidgets;
 
   const params = {
     query: [
@@ -98,20 +96,20 @@ function normalizeState({
         const { valueToQuery } = resolveExtension(
           'type',
           facetWidgetTypes,
-          facet,
+          facet
         );
 
         const name = facet.field.value;
         const value = facets[name];
 
         return valueToQuery({ value, facet });
-      }),
+      })
     ].filter((o) => !!o),
     sort_on: sortOn || query.sort_on,
     sort_order: sortOrder || query.sort_order,
     b_size: query.b_size,
     limit: query.limit,
-    block: id,
+    block: id
   };
 
   // TODO: need to check if SearchableText facet is not already in the query
@@ -120,13 +118,13 @@ function normalizeState({
   params.query = params.query.reduce(
     // Remove SearchableText from query
     (acc, kvp) => (kvp.i === 'SearchableText' ? acc : [...acc, kvp]),
-    [],
+    []
   );
   if (searchText) {
     params.query.push({
       i: 'SearchableText',
       o: 'plone.app.querystring.operation.string.contains',
-      v: searchText,
+      v: searchText
     });
   }
 
@@ -139,7 +137,7 @@ const getSearchFields = (searchData) => {
     ...SEARCH_ENDPOINT_FIELDS.map((k) => {
       return searchData[k] ? { [k]: searchData[k] } : {};
     }),
-    searchData.query ? { query: serializeQuery(searchData['query']) } : {},
+    searchData.query ? { query: serializeQuery(searchData['query']) } : {}
   );
 };
 
@@ -153,14 +151,14 @@ const useHashState = () => {
   const oldState = React.useMemo(() => {
     return {
       ...qs.parse(location.search),
-      ...qs.parse(location.hash),
+      ...qs.parse(location.hash)
     };
   }, [location.hash, location.search]);
 
   // This creates a shallow copy. Why is this needed?
   const current = Object.assign(
     {},
-    ...Array.from(Object.keys(oldState)).map((k) => ({ [k]: oldState[k] })),
+    ...Array.from(Object.keys(oldState)).map((k) => ({ [k]: oldState[k] }))
   );
 
   const setSearchData = React.useCallback(
@@ -182,11 +180,11 @@ const useHashState = () => {
 
       if (changed) {
         history.push({
-          hash: qs.stringify(newParams),
+          hash: qs.stringify(newParams)
         });
       }
     },
-    [history, oldState, location.hash],
+    [history, oldState, location.hash]
   );
 
   return [current, setSearchData];
@@ -210,12 +208,12 @@ const useSearchBlockState = (uniqueId, isEditMode) => {
 const deserializeQuery = (q) => {
   return JSON.parse(q)?.map((kvp) => ({
     ...kvp,
-    o: kvp.o.replace(/^paqo/, PAQO),
+    o: kvp.o.replace(/^paqo/, PAQO)
   }));
 };
 const serializeQuery = (q) => {
   return JSON.stringify(
-    q?.map((kvp) => ({ ...kvp, o: kvp.o.replace(PAQO, 'paqo') })),
+    q?.map((kvp) => ({ ...kvp, o: kvp.o.replace(PAQO, 'paqo') }))
   );
 };
 
@@ -227,7 +225,7 @@ const withSearch = (options) => (WrappedComponent) => {
 
     const [locationSearchData, setLocationSearchData] = useSearchBlockState(
       id,
-      editable,
+      editable
     );
 
     const urlQuery = locationSearchData.query
@@ -261,18 +259,18 @@ const withSearch = (options) => (WrappedComponent) => {
                 [f]:
                   multiFacets.indexOf(f) > -1
                     ? [locationSearchData[f]]
-                    : locationSearchData[f],
+                    : locationSearchData[f]
               }
-            : {},
-        ),
-      ),
+            : {}
+        )
+      )
     );
 
     const [sortOn, setSortOn] = React.useState(data?.query?.sort_on);
     const [sortOrder, setSortOrder] = React.useState(data?.query?.sort_order);
 
     const [searchData, setSearchData] = React.useState(
-      getInitialState(data, facets, urlSearchText, id),
+      getInitialState(data, facets, urlSearchText, id)
     );
 
     const timeoutRef = React.useRef();
@@ -290,7 +288,7 @@ const withSearch = (options) => (WrappedComponent) => {
               searchText: toSearchText,
               sortOn: toSortOn || sortOn,
               sortOrder: toSortOrder || sortOrder,
-              facetSettings,
+              facetSettings
             });
             if (toSearchFacets) setFacets(toSearchFacets);
             if (toSortOn) setSortOn(toSortOn);
@@ -298,7 +296,7 @@ const withSearch = (options) => (WrappedComponent) => {
             setSearchData(searchData);
             setLocationSearchData(getSearchFields(searchData));
           },
-          toSearchFacets ? inputDelay / 3 : inputDelay,
+          toSearchFacets ? inputDelay / 3 : inputDelay
         );
       },
       [
@@ -308,12 +306,12 @@ const withSearch = (options) => (WrappedComponent) => {
         setLocationSearchData,
         sortOn,
         sortOrder,
-        facetSettings,
-      ],
+        facetSettings
+      ]
     );
 
     const querystringResults = useSelector(
-      (state) => state.querystringsearch.subrequests,
+      (state) => state.querystringsearch.subrequests
     );
     const totalItems =
       querystringResults[id]?.total || querystringResults[id]?.items?.length;

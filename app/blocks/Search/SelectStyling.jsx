@@ -4,8 +4,8 @@ export const selectTheme = (theme) => ({
   colors: {
     ...theme.colors,
     primary25: 'hotpink',
-    primary: '#b8c6c8',
-  },
+    primary: '#b8c6c8'
+  }
 });
 
 export const customSelectStyles = {
@@ -15,7 +15,7 @@ export const customSelectStyles = {
     borderBottom: '1px solid #c7d5d8',
     boxShadow: 'none',
     borderBottomStyle: state.menuIsOpen ? 'dotted' : 'solid',
-    minHeight: '40px',
+    minHeight: '40px'
   }),
   menu: (styles, state) => ({
     ...styles,
@@ -23,19 +23,19 @@ export const customSelectStyles = {
     marginTop: 0,
     boxShadow: 'none',
     borderBottom: '1px solid #c7d5d8',
-    zIndex: 2,
+    zIndex: 2
   }),
   indicatorSeparator: (styles) => ({
     ...styles,
-    width: null,
+    width: null
   }),
   valueContainer: (styles) => ({
     ...styles,
     padding: '0px',
-    paddingLeft: 0,
+    paddingLeft: 0
   }),
   dropdownIndicator: (styles) => ({
-    paddingRight: 0,
+    paddingRight: 0
   }),
   option: (styles, state) => ({
     ...styles,
@@ -51,10 +51,10 @@ export const customSelectStyles = {
       ? '#4a4a4a'
       : 'inherit',
     ':active': {
-      backgroundColor: null,
+      backgroundColor: null
     },
     svg: {
-      flex: '0 0 auto',
-    },
-  }),
+      flex: '0 0 auto'
+    }
+  })
 };

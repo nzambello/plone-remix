@@ -75,7 +75,7 @@ const ImageGalleryTemplate = ({ items }) => {
   const { settings } = config;
   const renderItems = items.filter(
     (content) =>
-      settings.imageObjects.includes(content['@type']) && content.image_field,
+      settings.imageObjects.includes(content['@type']) && content.image_field
   );
   const imagesInfo = renderItems.map((item) => {
     return {
@@ -84,7 +84,7 @@ const ImageGalleryTemplate = ({ items }) => {
       }/large`,
       thumbnail: `${flattenToAppURL(item['@id'])}/@@images/${
         item.image_field
-      }/thumb`,
+      }/thumb`
     };
   });
 
@@ -103,7 +103,7 @@ const ImageGalleryTemplate = ({ items }) => {
 };
 
 ImageGalleryTemplate.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.any).isRequired,
+  items: PropTypes.arrayOf(PropTypes.any).isRequired
 };
 
 export default ImageGalleryTemplate;

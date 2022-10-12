@@ -12,9 +12,9 @@ test('renders an Listing Data Sidebar component', async () => {
   const store = mockStore({
     intl: {
       locale: 'en',
-      messages: {},
+      messages: {}
     },
-    querystring: { sortable_indexes: {} },
+    querystring: { sortable_indexes: {} }
   });
   const component = renderer.create(
     <Provider store={store}>
@@ -26,15 +26,15 @@ test('renders an Listing Data Sidebar component', async () => {
             {
               i: 'review_state',
               o: 'plone.app.querystring.operation.selection.any',
-              v: ['private'],
-            },
-          ],
+              v: ['private']
+            }
+          ]
         }}
         block="1234"
         pathname="/news"
         onChangeBlock={() => {}}
       />
-    </Provider>,
+    </Provider>
   );
   await waitFor(() => {});
   expect(component.toJSON()).toMatchSnapshot();

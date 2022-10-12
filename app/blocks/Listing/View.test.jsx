@@ -13,13 +13,13 @@ test('renders a view image component for the listing block', () => {
           {
             i: 'review_state',
             o: 'plone.app.querystring.operation.selection.any',
-            v: ['private'],
-          },
-        ],
+            v: ['private']
+          }
+        ]
       }}
       properties={{ is_folderish: true }}
       block="123u12u3"
-    />,
+    />
   );
   const json = component.toJSON();
   expect(json).toMatchSnapshot();

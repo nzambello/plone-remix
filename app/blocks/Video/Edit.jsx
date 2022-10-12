@@ -21,12 +21,12 @@ import { compose } from 'redux';
 const messages = defineMessages({
   VideoFormDescription: {
     id: 'Specify a youtube video or playlist url',
-    defaultMessage: 'Specify a youtube video or playlist url',
+    defaultMessage: 'Specify a youtube video or playlist url'
   },
   VideoBlockInputPlaceholder: {
     id: 'Type a Video (YouTube, Vimeo or mp4) URL',
-    defaultMessage: 'Type a Video (YouTube, Vimeo or mp4) URL',
-  },
+    defaultMessage: 'Type a Video (YouTube, Vimeo or mp4) URL'
+  }
 });
 
 /**
@@ -50,7 +50,7 @@ class Edit extends Component {
     onDeleteBlock: PropTypes.func.isRequired,
     onFocusPreviousBlock: PropTypes.func.isRequired,
     onFocusNextBlock: PropTypes.func.isRequired,
-    handleKeyDown: PropTypes.func.isRequired,
+    handleKeyDown: PropTypes.func.isRequired
   };
 
   /**
@@ -66,7 +66,7 @@ class Edit extends Component {
     this.onSubmitUrl = this.onSubmitUrl.bind(this);
     this.onKeyDownVariantMenuForm = this.onKeyDownVariantMenuForm.bind(this);
     this.state = {
-      url: '',
+      url: ''
     };
   }
 
@@ -78,7 +78,7 @@ class Edit extends Component {
    */
   onChangeUrl({ target }) {
     this.setState({
-      url: target.value,
+      url: target.value
     });
   }
 
@@ -103,13 +103,13 @@ class Edit extends Component {
   onSubmitUrl() {
     this.props.onChangeBlock(this.props.block, {
       ...this.props.data,
-      url: this.state.url,
+      url: this.state.url
     });
   }
 
   resetSubmitUrl = () => {
     this.setState({
-      url: '',
+      url: ''
     });
   };
 
@@ -149,9 +149,9 @@ class Edit extends Component {
           'block video align',
           {
             selected: this.props.selected,
-            center: !Boolean(this.props.data.align),
+            center: !Boolean(this.props.data.align)
           },
-          this.props.data.align,
+          this.props.data.align
         )}
       >
         {data.url ? (

@@ -4,8 +4,8 @@ export const selectTheme = (theme) => ({
   colors: {
     ...theme.colors,
     primary25: 'hotpink',
-    primary: '#b8c6c8',
-  },
+    primary: '#b8c6c8'
+  }
 });
 
 export const customSelectStyles = {
@@ -15,7 +15,7 @@ export const customSelectStyles = {
     borderBottom: '1px solid #c7d5d8',
     boxShadow: 'none',
     borderBottomStyle: state.menuIsOpen ? 'dotted' : 'solid',
-    minHeight: '37px',
+    minHeight: '37px'
   }),
   menu: (styles, state) => ({
     ...styles,
@@ -23,20 +23,20 @@ export const customSelectStyles = {
     marginTop: 0,
     boxShadow: 'none',
     borderBottom: '1px solid #c7d5d8',
-    zIndex: 2,
+    zIndex: 2
   }),
   indicatorSeparator: (styles) => ({
     ...styles,
-    width: null,
+    width: null
   }),
   valueContainer: (styles) => ({
     ...styles,
     padding: '0px',
-    paddingLeft: 0,
+    paddingLeft: 0
   }),
   dropdownIndicator: (styles) => ({
     paddingRight: 0,
-    paddingTop: '4px',
+    paddingTop: '4px'
   }),
   option: (styles, state) => ({
     ...styles,
@@ -52,14 +52,14 @@ export const customSelectStyles = {
       ? '#4a4a4a'
       : 'inherit',
     ':active': {
-      backgroundColor: null,
+      backgroundColor: null
     },
     svg: {
       flex: '0 0 auto',
       height: '18px !important',
-      width: '18px !important',
-    },
-  }),
+      width: '18px !important'
+    }
+  })
 };
 
 export const sortOnSelectStyles = {
@@ -69,7 +69,7 @@ export const sortOnSelectStyles = {
     borderRadius: '5px',
     boxShadow: 'none',
     minHeight: '20px',
-    width: '170px',
+    width: '170px'
   }),
   menu: (styles, state) => ({
     ...styles,
@@ -78,15 +78,15 @@ export const sortOnSelectStyles = {
     boxShadow: 'none',
     border: '1px solid #c7d5d8',
     zIndex: 2,
-    width: '170px',
+    width: '170px'
   }),
   indicatorSeparator: (styles) => ({
     ...styles,
-    width: null,
+    width: null
   }),
   dropdownIndicator: (styles) => ({
     ...styles,
-    padding: '3px',
+    padding: '3px'
   }),
   option: (styles, state) => ({
     ...styles,
@@ -102,12 +102,12 @@ export const sortOnSelectStyles = {
       ? '#4a4a4a'
       : 'inherit',
     ':active': {
-      backgroundColor: null,
+      backgroundColor: null
     },
     svg: {
       flex: '0 0 auto',
       height: '18px !important',
-      width: '18px !important',
-    },
-  }),
+      width: '18px !important'
+    }
+  })
 };

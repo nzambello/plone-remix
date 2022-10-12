@@ -64,7 +64,7 @@ const Body = ({ data, isEditMode }) => {
     aspectRatio: '16:9',
     tabIndex: 0,
     onKeyPress: onKeyDown,
-    ref: ref,
+    ref: ref
   };
 
   return (
@@ -72,7 +72,7 @@ const Body = ({ data, isEditMode }) => {
       {data.url && (
         <div
           className={cx('video-inner', {
-            'full-width': data.align === 'full',
+            'full-width': data.align === 'full'
           })}
         >
           {data.url.match('youtu') ? (
@@ -136,7 +136,7 @@ const Body = ({ data, isEditMode }) => {
  * @static
  */
 Body.propTypes = {
-  data: PropTypes.objectOf(PropTypes.any).isRequired,
+  data: PropTypes.objectOf(PropTypes.any).isRequired
 };
 
 export default Body;

@@ -6,7 +6,7 @@ import { withBlockExtensions } from '@plone/volto/helpers';
 
 import {
   SidebarPortal,
-  ListingBlockBody as ListingBody,
+  ListingBlockBody as ListingBody
 } from '@plone/volto/components';
 import ListingData from './ListingData';
 
@@ -15,12 +15,12 @@ import { getBaseUrl } from '@plone/volto/helpers';
 const messages = defineMessages({
   results: {
     id: 'Results preview',
-    defaultMessage: 'Results preview',
+    defaultMessage: 'Results preview'
   },
   items: {
     id: 'Contained items',
-    defaultMessage: 'Contained items',
-  },
+    defaultMessage: 'Contained items'
+  }
 });
 
 const Edit = React.memo(
@@ -35,7 +35,7 @@ const Edit = React.memo(
         onChangeBlock(block, {
           ...data,
           query: [],
-          block,
+          block
         });
       }
       /* eslint-disable react-hooks/exhaustive-deps */
@@ -68,7 +68,7 @@ const Edit = React.memo(
       nextProps.selected !== prevProps.selected ||
       !isEqual(prevProps.data, nextProps.data)
     );
-  },
+  }
 );
 
 Edit.propTypes = {
@@ -79,7 +79,7 @@ Edit.propTypes = {
   onSelectBlock: PropTypes.func.isRequired,
   items: PropTypes.arrayOf(PropTypes.any),
   properties: PropTypes.objectOf(PropTypes.any).isRequired,
-  pathname: PropTypes.string.isRequired,
+  pathname: PropTypes.string.isRequired
 };
 
 export default withBlockExtensions(Edit);
