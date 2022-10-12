@@ -1,6 +1,76 @@
-# Welcome to Remix!
+# Plone Remix Stack
 
-- [Remix Docs](https://remix.run/docs)
+[Remix](https://remix.run/stacks) stack for [Plone 6](https://plone.org/), the enterprise open-source CMS.
+
+Handles multilanguage routing, navigation, and content rendering.
+
+Supports [Volto](https://github.com/plone/volto) blocks with [volto-slate](https://github.com/plone/volto/tree/master/packages/volto-slate) text blocks.
+
+Learn more about [Remix Stacks](https://remix.run/stacks).
+
+```sh
+npx create-remix --template raw-material/plone-remix
+```
+
+## What's in the stack
+
+### i18n
+
+- [remix-i18next](https://github.com/sergiodxa/remix-i18next)
+
+### Plone REST API TypeScript Client
+
+- [plone-restapi-client](https://github.com/collective/plone-restapi-client)
+
+### Linting and formatting
+
+- [Prettier](https://prettier.io)
+- [ESLint](https://eslint.org)
+- [StyleLint](https://stylelint.io/)
+- [Husky](https://typicode.github.io/husky/#/)
+- [Commitlint](https://commitlint.js.org/#/)
+
+### Release
+
+- [Commitlint](https://commitlint.js.org/#/)
+- [Release-it](https://github.com/release-it/release-it)
+
+### Misc
+
+- [Storybook](https://storybook.js.org)
+- [GitHub Actions](https://github.com/nzambello/vite-react-template/actions)
+
+### Make it yours
+
+In the `package.json` file, check `release-it`, `eslint`, `stylelint` and `prettier` configurations and change the values to match your project and your preferences.
+
+## Getting started
+
+Use this template:
+
+```sh
+npx create-remix --template raw-material/plone-remix
+```
+
+Or clone this template:
+
+```sh
+npx degit raw-material/plone-remix
+```
+
+And setup your environment variables:
+
+```sh
+mv .env.example .env
+```
+
+### Configuration
+
+The stack is configured to work with a Plone site running on `http://localhost:8080/Plone` with the `plone.restapi` addon installed.
+
+Check the `.env` file to change the configuration.
+
+Setup your project settings in `app/config.tsx` as you do in Volto.
 
 ## Development
 
@@ -36,18 +106,3 @@ Make sure to deploy the output of `remix build`
 
 - `build/`
 - `public/build/`
-
-### Using a Template
-
-When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
-
-```sh
-cd ..
-# create a new project, and pick a pre-configured host
-npx create-remix@latest
-cd my-new-remix-app
-# remove the new project's app (not the old one!)
-rm -rf app
-# copy your app over
-cp -R ../my-old-remix-app/app app
-```
