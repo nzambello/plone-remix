@@ -102,6 +102,7 @@ const settings: Settings = {
       code: ({ children }) => <code>{children}</code>,
 
       blockquote: ({ children }) => <blockquote>{children}</blockquote>,
+      link: LinkElement,
       a: LinkElement
     }
   },
