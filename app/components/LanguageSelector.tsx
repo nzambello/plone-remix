@@ -1,5 +1,5 @@
 import type { PloneContent } from 'plone-restapi-client/dist/content';
-import { Link, useLoaderData, Form } from '@remix-run/react';
+import { Link, useLoaderData } from '@remix-run/react';
 import { flattenToAppURL } from '../utils/urls';
 import cx from 'classnames';
 import config from '../config';

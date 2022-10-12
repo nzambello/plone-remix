@@ -6,6 +6,7 @@
   "sideEffects": false,
   "scripts": {
     "format": "prettier --write app types",
+    "lint:js": "eslint \"app/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}\" types",
     "build": "remix build",
     "dev": "remix dev",
     "start": "remix-serve build"
@@ -20,7 +21,7 @@
     "i18next-fs-backend": "1.1.5",
     "i18next-http-backend": "1.4.4",
     "lodash.memoize": "4.1.2",
-    "plone-restapi-client": "0.1.1",
+    "plone-restapi-client": "0.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-i18next": "11.18.6",
@@ -38,7 +39,12 @@
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
     "@types/uuid": "8.3.4",
-    "eslint": "^8.11.0",
+    "eslint": "8.25.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-jest": "27.1.1",
+    "eslint-plugin-jsx-a11y": "6.6.1",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.31.10",
     "prettier": "2.7.1",
     "typescript": "^4.5.5"
   },
@@ -60,6 +66,27 @@
         }
       }
     ]
+  },
+  "eslintIgnore": ["/node_modules", "/build", "/public/build"],
+  "eslintConfig": {
+    "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node", "@remix-run/eslint-config/jest", "prettier", "plugin:prettier/recommended"],
+    "plugins": ["jest", "jsx-a11y"],
+    "settings": {
+      "jest": {
+        "version": 27
+      }
+    },
+    "rules": {
+      "prettier/prettier": [
+        "warn",
+        {
+          "singleQuote": true,
+          "trailingComma": "none"
+        }
+      ],
+      "react/jsx-uses-react": "off",
+      "react/react-in-jsx-scope": "off"
+    }
   },
   "engines": {
     "node": ">=14"

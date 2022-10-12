@@ -7,7 +7,7 @@ const View = ({
 }: {
   content: PloneContent & {
     subtitle?: string;
-    image: {
+    image?: {
       'content-type': string;
       download: string;
       scales: {
@@ -18,7 +18,7 @@ const View = ({
         };
       };
     };
-    text: {
+    text?: {
       data: string;
     };
   };
